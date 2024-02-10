@@ -82,22 +82,15 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 {
     
 
-   
-    
     if(isset($_SESSION["date"])){
         $_SESSION["date_now"] = date("Y-m-d");
     }else{
 
         $_SESSION["date_now"] = $_SESSION["date"];
     }
-//
-//  var_dump($servicio_nombre);
-//// var_dump($service);
-//// var_dump($services);
-//  var_dump($services_id);
-////  die();
 
-    if($firstname[0] != ""){
+
+    if(isset($firstname)){
 
     foreach ($firstname as $key => $item) {
         $userOld = explode(" ", ucwords(strtolower($item)));
@@ -107,19 +100,18 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
         }
         
     }
-}else {
-   // $users = "";
-}
 
+    }else {
+        // $users = "";
+    }
+
+  var_dump($firstname);
 
 
     foreach ($servicio_nombre as $key => $item) {
 
         $services[$key] = getServicesByName($item);
     }
-  //  var_dump($services);
-   // die();
-
     if (!($culto_id == "" &&( $ninos == "" || $ninos == 0) && ( $adultos == "" || $adultos == 0) && $firstname[0] == "")) {
 
 
@@ -168,13 +160,14 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
         }
 
-
+      
         if ($servicio_nombre != "") {
             $length = count($servicio_nombre);
             for ($key = 0; $key < $length; $key++) {
                 $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
 
                 if ($id[$key] == null && $isExist == null) {
+                   
                     if($users[$key]['id'] != '' && $users[$key]['id'] != null && $users[$key]['id'] != false){
                         $oneUser = [
                             'users_id' => $users[$key]['id'],
@@ -286,7 +279,6 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
         }
   //  }
-  var_dump($datas);
     require_once 'view/home.php';
 }
 
