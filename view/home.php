@@ -99,12 +99,12 @@ ob_start();
             <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id"] ?>">
             </div>
             </div>
-    
+    <div class="bg-success col-12 justify-content-center align-items-center ">
             <?php
             foreach ($datas as $data) { ?>
     
                 <!--      <input type="text" name="name[]" id="dd" title="coucou" value="<?= $data["name"] ?>" list="listName"> -->
-                <select class="selectpicker form-control-lg show-tick col-sm-3half form-select-lg"   name="name[]" data-live-search="true">
+                <select class="bg-danger selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="name[]" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
                     foreach ($services as $service) {
@@ -121,7 +121,7 @@ ob_start();
                 <!--         <input type="text" name="firstname[]" id="dd" title="coucou"
                    value="<?= $data["firstname"] ?> <?= $data["lastname"] ?>" list="listUserFirst"> -->
 
-                <select class="selectpicker form-control-lg col-sm-3half" name="firstname[]" data-live-search="true" id="select_id" >
+                <select class="bg-warning selectpicker form-control-sm col-sm-3half" name="firstname[]" data-live-search="true" id="select_id" >
                     <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
                     <?php
                     foreach ($users as $user) {
@@ -148,6 +148,7 @@ ob_start();
                 <input type="hidden" name="id[]" id="dd" value="<?= $data["id"] ?>">
                 <br>
             <?php } ?>
+            </div>
         </div>
      
     </form>
