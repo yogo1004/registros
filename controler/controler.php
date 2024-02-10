@@ -112,12 +112,12 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
         $services[$key] = getServicesByName($item);
     }
-    if (!($culto_id == "" &&( $ninos == "" || $ninos == 0) && ( $adultos == "" || $adultos == 0) && $firstname[0] == "")) {
+    if (!($culto_id == "" &&( $ninos == "" || $ninos == 0) && ( $adultos == "" || $adultos == 0) && empty($firstname))) {
 
 
         $cultos = getCulteByDate($_SESSION["date"]);
 
-        if ($adultos != "" || $ninos != "" || $firstname[0] != "") {
+        if ($adultos != "" || $ninos != "" || isset($firstname)) {
 
             if (isset($cultos['id']) == false) {
                 $oneCulto = [
