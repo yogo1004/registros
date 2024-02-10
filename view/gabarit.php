@@ -33,9 +33,9 @@
 </head>
 
 <body class="d-flex justify-content-center">
-<div id="sub-body" class="h-100 col-12 bg-primary" style="position: absolute;   height: 100%;
+<div id="sub-body" class="h-100 col-12 " style="position: absolute;   height: 100%;  background: linear-gradient(#f8e5e5,white);
    overflow: auto;">
-   <div style="width: 100%; margin-bottom: 10%; height: 150px"
+   <div style="width: 100%;  height: 150px"
          class="shadow p-3 bg-danger rounded  d-flex justify-content-center">
         <p style="text-align: center; width:400px;font-family: 'Arial' ;color: #808080;top: 5px;left: 20px; font-size: 30px; ">
             ASSISTENCE EEANJESUS</p>
@@ -57,7 +57,7 @@
        
     </div> 
     <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-2 margin-top: 10%;"></div>
     <?= $content2; ?>
     <div class="col-lg-2"></div>
     
