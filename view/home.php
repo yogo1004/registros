@@ -143,9 +143,15 @@ ob_start();
                 </select>
                 
                 <!--     <a type="button" href="index.php?action=deleteData&id=<?= $data["id"] ?>" class="btn btn-danger">X</a> -->
-                <input type="hidden" name="services_id[]" id="dd" value="<?= $data["services_id"] ?>">
-                <input type="hidden" name="users_id[]" id="dd" value="<?= $data["users_id"] ?>">
-                <input type="hidden" name="id[]" id="dd" value="<?= $data["id"] ?>">
+                        <?php if( isset($data['services_id'])) { ?>
+                <input type="hidden" name="services_id[]" id="dd2" value="<?=$data["services_id"]?>">
+                <?php } ?>
+                <?php if( isset($data['users_id'])) { ?>
+                <input type="hidden" name="users_id[]" id="dd3" value="<?=$data["users_id"]?>">
+                <?php } ?>
+                <?php if( isset($data['id'])) {  ?>
+                <input type="hidden" name="id[]" id="dd4" value="<?=$data["id"]?>">
+                <?php } ?>
                 <br>
             <?php } ?>
             </div>
