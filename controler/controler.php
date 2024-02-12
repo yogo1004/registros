@@ -84,7 +84,7 @@ function home2()
     require_once 'view/home.php';
 }
 
-function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $services_id, $firstname, $users_id, $id, $service, $first, $last)
+function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $services_id, $firstname, $users_id, $id, $service, $first, $last, $comite_id)
 {
     
     $comites = getComites();
@@ -112,8 +112,6 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
         // $users = "";
     }
 
-  var_dump($firstname);
-
 
     foreach ($servicio_nombre as $key => $item) {
 
@@ -130,7 +128,8 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                 $oneCulto = [
                     'date2' => $_SESSION["date"],
                     'adultos' => $adultos,
-                    'ninos' => $ninos
+                    'ninos' => $ninos,
+                    'comite_id' => $comite_id
                 ];
 
 
@@ -151,7 +150,8 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                     'date2' => $_SESSION["date"],
                     'adultos' => $adultos,
                     'ninos' => $ninos,
-                    'id' => $cultos['id']
+                    'id' => $cultos['id'],
+                    'comite_id' => $comite_id
                 ];
 
 

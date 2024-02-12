@@ -97,7 +97,7 @@ function getCulteByDate($date)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT culte.*, comites.name FROM culte JOIN comites ON comites.id_comite = culte.comite_id WHERE culte.date =:date3 ';
+        $query = 'SELECT culte.*, comites.name, comites.id_comite FROM culte JOIN comites ON comites.id_comite = culte.comite_id WHERE culte.date =:date3 ';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['date3' => $date]);//execute query
@@ -292,7 +292,7 @@ function createCulto($oneUser)
     $dbh = getPDO();
     try {
         $query = "INSERT INTO culte(date,adultos,ninos) 
-                  VALUES  (:date2,:adultos,:ninos)";
+                  VALUES  (:date2,:adultos,:ninos,:comite_id)";
         $stmt = $dbh->prepare($query);
         $stmt->execute($oneUser);
 
@@ -840,7 +840,8 @@ function updateCulto($delivery)
         $query = "UPDATE  culte set 
                   date = :date2, 
                   adultos =:adultos, 
-                  ninos =:ninos 
+                  ninos =:ninos,
+                  comite_id =:comite_id
                   WHERE id =:id";
         $statment = $dbh->prepare($query);
         $statment->execute($delivery);//prepare query
