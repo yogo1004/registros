@@ -97,11 +97,28 @@ ob_start();
             <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
                    value="<?= $cultos["ninos"] ?>"><br>
             <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id"] ?>">
+            <select class="bg-danger selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite[]" data-live-search="true">
+            <option class=""  value="" data-tokens="nada">nada</option>
+                    <?php
+                    var_dump($cultos);
+                    foreach ($comites as $comite) {
+                         if($comite['name'] == $cultos['name']){
+                            ?>
+                            <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name']?>" selected><?=$comite['name']?></option>
+                        <?php } else {  ?>
+                            <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name']?>"><?=$comite['name']?></option>
+                        <?php } ?>
+                    <?php } ?>
+            </select>
             </div>
             </div>
     <div class=" justify-content-center align-items-center ">
+
+
             <?php
             foreach ($datas as $data) { ?>
+
+       
     
                 <!--      <input type="text" name="name[]" id="dd" title="coucou" value="<?= $data["name"] ?>" list="listName"> -->
                 <select class="bg-danger selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="name[]" data-live-search="true">

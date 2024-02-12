@@ -11,6 +11,8 @@ function home2()
     $users = getUsers();
     $services = getServices();
 
+    $comites = getComites();
+   
     $cultos = getCulteByDate($_SESSION["date"]);
 
     if (!$cultos) {
@@ -18,6 +20,10 @@ function home2()
             'date' => $_SESSION["date"]
         ];
     }
+
+    var_dump(
+        $cultos
+        );
     $datas = getDataByDate($_SESSION["date"]);
     $base = [
         0 => [
@@ -81,6 +87,7 @@ function home2()
 function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $services_id, $firstname, $users_id, $id, $service, $first, $last)
 {
     
+    $comites = getComites();
 
     if(isset($_SESSION["date"])){
         $_SESSION["date_now"] = date("Y-m-d");

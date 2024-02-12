@@ -54,6 +54,26 @@ function getServices()
         return null;
     }
 }
+
+function getComites()
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = 'SELECT * FROM comites ';
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute();//execute query
+        $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
 function getCulto()
 {
     require "model/.constant.php";
@@ -77,7 +97,7 @@ function getCulteByDate($date)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT * FROM culte c WHERE c.date =:date3 ';
+        $query = 'SELECT culte.*, comites.name FROM culte JOIN comites ON comites.id_comite = culte.comite_id WHERE culte.date =:date3 ';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['date3' => $date]);//execute query
