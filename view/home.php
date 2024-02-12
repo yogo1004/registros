@@ -103,15 +103,18 @@ ob_start();
                     foreach ($comites as $comite) {
                          if($comite['name'] == $cultos['name']){
                             ?>
-                            <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name']?>" selected><?=$comite['name']?></option>
+                            <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name_comite']?>" selected><?=$comite['name_comite']?></option>
                         <?php } else {  ?>
-                            <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name']?>"><?=$comite['name']?></option>
+                            <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name_comite']?>"><?=$comite['name_comite']?></option>
                         <?php } ?>
                     <?php } ?>
             </select>
+            <label for="appt">Select a time:</label>
+<input type="time" id="appt" name="appt"> 
             </div>
             </div>
     <div class=" justify-content-center align-items-center ">
+
 
 
             <?php

@@ -11,10 +11,10 @@ function home2()
     $users = getUsers();
     $services = getServices();
 
-    $comites = getComites();
+    
    
     $cultos = getCulteByDate($_SESSION["date"]);
-
+ var_dump($cultos);
     if (!$cultos) {
         $cultos = [
             'date' => $_SESSION["date"]
@@ -24,6 +24,9 @@ function home2()
     var_dump(
         $cultos
         );
+
+        $comites = getComites();
+   
     $datas = getDataByDate($_SESSION["date"]);
     $base = [
         0 => [

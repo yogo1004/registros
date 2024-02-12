@@ -18,7 +18,7 @@ ob_start();
     <tr>
       <th scope="col">Nombre</th>
       <th scope="col">fecha</th>
-      <th scope="col">horario</th>
+      <th scope="col">horario</th> 
       <th scope="col">lugar</th>
       <th scope="col">comité</th>
       <th scope="col">detalles</th>

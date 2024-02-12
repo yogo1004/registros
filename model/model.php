@@ -117,7 +117,7 @@ function getCulteByDate($date)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT culte.*, comites.name, comites.id_comite FROM culte JOIN comites ON comites.id_comite = culte.comite_id WHERE culte.date =:date3 ';
+        $query = 'SELECT culte.*, comites.name_comite, comites.id_comite FROM culte JOIN comites ON comites.id_comite = culte.comite_id WHERE culte.date =:date3 ';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['date3' => $date]);//execute query
