@@ -20,7 +20,9 @@ if (isset($_GET['action'])) {
 switch ($action) {
 
 
-
+case anunciosPage:
+    anunciosPage();
+    break;
 
     case 'signup':
 echo "<br>hola<br>";

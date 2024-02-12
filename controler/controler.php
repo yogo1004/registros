@@ -468,3 +468,7 @@ function nouveau()
 
     require_once 'view/home.php';
 }
+function anunciosPage(){
+    $events = getEvents();
+    require_once 'view/anounces.php';
+}

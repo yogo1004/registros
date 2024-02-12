@@ -41,9 +41,11 @@
             ASSISTENCE EEANJESUS</p>
         <div style="position: absolute; top: 75px;">
 
-
+        <a style="width: 300px; height: 50px" href="index.php?action=anunciosPage" class="btn btn-warning"  >
+                ANUNCIOS
+</a>
            
-            <button style="width: 300px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            <button style="width: 300px" type="button" class="btn btn-primary" data-target="#exampleModalCenter">
                 Créer un utilisateur
             </button>
 
