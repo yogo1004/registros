@@ -97,7 +97,7 @@ ob_start();
             <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
                    value="<?= $cultos["ninos"] ?>"><br>
             <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id"] ?>">
-            <select class="bg-danger selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite" data-live-search="true">
+            <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite" data-live-search="true">
             <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
                     foreach ($comites as $comite) {
