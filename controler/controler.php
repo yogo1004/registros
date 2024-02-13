@@ -2,11 +2,23 @@
 require "model/model.php";
 
 
-function home2()
+function home2($id_event)
 {
     // date("Y-m-d") "2023-02-22"
-    $date = date("Y-m-d");
-    $_SESSION["date_now"] = date("Y-m-d");
+
+
+$event = getEventById($id_event);
+
+
+    if ($id_event == NULL){
+         $date = date("Y-m-d");
+        $_SESSION["date_now"] = date("Y-m-d");
+    } else{
+        $date = $event['date'];
+         $_SESSION["date_now"] = $event['date'];
+    }
+   
+   
     $_SESSION["date"] = $date;
     $users = getUsers();
     $services = getServices();
