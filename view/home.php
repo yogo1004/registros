@@ -11,7 +11,7 @@ ob_start();
 <div class="col-12 col-lg-8"  style="position: relative;bottom:0px;justify-content: center;align-items: center; height: 100%; ">
 
 
-
+<h5><?=$cultos['name_event']?></h5>
 
     <form method="post" action="index.php?action=signup" id="form" class="d-flex justify-content-center w-100 h-100">
         
@@ -97,7 +97,6 @@ ob_start();
             <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
                    value="<?= $cultos["friends"] ?>"><br>
             <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-        
             <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite" data-live-search="true">
             <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
@@ -112,8 +111,24 @@ ob_start();
                         <?php } ?>
                     <?php } ?>
             </select>
+
+         <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg" id="time_init"  name="time_init" data-live-search="true">
+                    <?php
+                    
+
+                    foreach ($Allcultos as $culto) {
+                         if($cultos['time_init'] == $culto['time_init']){
+                            ?>
+                            <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>" selected><?=$culto['time_init']?></option>
+                        <?php } else {  ?>
+                            <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>"><?=$culto['time_init']?></option>
+                        <?php } ?>
+                    <?php } ?>
+            </select>
+
             <label for="appt">Select a time:</label>
-<input type="time" id="appt" name="appt"> 
+            <?=var_dump($cultos['time_init']);?>
+<input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>"> 
             </div>
             </div>
     <div class=" justify-content-center align-items-center ">
@@ -301,6 +316,7 @@ ob_start();
             save.addEventListener("click", fnEditProfilFirstname)
             save2.addEventListener("click", fnEditProfilFirstname)
             calendar.addEventListener("input", fnEditProfilFirstname)
+            time_init.addEventListener("change", fnEditProfilFirstname)
             confirmer.addEventListener("click", fnEditProfilFirstname)
             addService.addEventListener("click", fnAddInputs)
             

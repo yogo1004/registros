@@ -25,10 +25,12 @@ case 'anunciosPage':
     anunciosPage();
     break;
 
+case 'home':
+home2();
+break;
     case 'signup':
-echo "<br>hola<br>";
-
-        home3($_POST["date"],$_POST["adultos"],$_POST["ninos"],$_POST["culto_id"],$_POST["name"],$_POST["services_id"],$_POST["firstname"],$_POST["users_id"],$_POST['id'],$_POST['service'],$_POST['first'],$_POST['last'],$_POST["comite"]);
+     
+        home3($_POST["date"],$_POST["adultos"],$_POST["ninos"],$_POST["culto_id"],$_POST["name"],$_POST["services_id"],$_POST["firstname"],$_POST["users_id"],$_POST['id'],$_POST['service'],$_POST['first'],$_POST['last'],$_POST["comite"], $_POST["time_init"], $_POST["time_init_new"]);
         break;
     case 'deleteData':
         deleteData2($_GET['id']);

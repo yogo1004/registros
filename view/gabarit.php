@@ -38,7 +38,7 @@
    <div style="width: 100%;  height: 150px"
          class="shadow p-3 bg-danger rounded  d-flex justify-content-center">
         <p style="text-align: center; width:400px;font-family: 'Arial' ;color: #808080;top: 5px;left: 20px; font-size: 30px; ">
-            ASSISTENCE EEANJESUS</p>
+            <a href="index.php?action=home">ASSISTENCE EEANJESUS</a></p>
         <div style="position: absolute; top: 75px;">
 
         <a style="width: 300px; height: 50px" href="index.php?action=anunciosPage" class="btn btn-warning"  >

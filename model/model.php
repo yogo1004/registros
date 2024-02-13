@@ -57,16 +57,54 @@ function getServices()
 
 
 
+
+function getCulteByDateAndTime($date,$time_init)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE date =:date3 AND time_init =:time_init';
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['date3' => $date, 'time_init' => $time_init]);//execute query
+        $queryResult = $statment->fetch(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
+function getEventById($id_event)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE id_event =:id_event ';
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['id_event' => $id_event]);//execute query
+        $queryResult = $statment->fetch(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
 function getCulteByDate($date)
 {
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE events.date =:date3 ';
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE date =:date3 ';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['date3' => $date]);//execute query
-        $queryResult = $statment->fetch(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
         $dbh = null; //refermer une connection quand on a fini
         if ($debug) var_dump($queryResult);
         return $queryResult;
@@ -99,8 +137,7 @@ function getComites()
 
 
 
-
-function getDataByDate($date2)
+function getDataByDate($date2, $time_init)
 {
     require "model/.constant.php";
     try {
@@ -109,10 +146,10 @@ function getDataByDate($date2)
                  LEFT  JOIN users ON users.id = us.users_id
                   JOIN events ON events.id_event = us.event_id
                 LEFT  JOIN services s ON s.id = us.services_id
-						WHERE events.date =:date4";
+						WHERE events.date =:date4 and time_init=:time_init";
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
-        $statment->execute(['date4' => $date2]);//execute query
+        $statment->execute(['date4' => $date2, 'time_init' => $time_init]);//execute query
         $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
         $dbh = null; //refermer une connection quand on a fini
         if ($debug) var_dump($queryResult);
@@ -167,10 +204,10 @@ function getServicesByName($item)
 
 function createCulto($oneUser)
 {
-    $dbh = getPDO();
+    
+        $dbh = getPDO();
     try {
-        $query = 'INSERT INTO events(events.name_event,events.date,comite_id,siblings,friends) 
-                  VALUES  ("test",:date2,:comite_id),:siblings,:friends';
+        $query = "INSERT INTO events(name_event, date, time_init, comite_id, siblings, friends) VALUES (:name_event, :date2, :time_init, :comite_id, :siblings, :friends)";
         $stmt = $dbh->prepare($query);
         $stmt->execute($oneUser);
 
@@ -190,11 +227,12 @@ function updateCulto($delivery)
     try {
         $dbh = getPDO();
         $query = 'UPDATE  events set 
-                    events.name_event = "testmodif",
+                  events.name_event =:name_event,
                   events.date =:date2,
+                  events.time_init =:time_init,
+                  comite_id =:comite_id,
                   siblings =:siblings, 
-                  friends =:friends,
-                comite_id =:comite_id
+                  friends =:friends
                   WHERE id_event =:id';
         $statment = $dbh->prepare($query);
         $statment->execute($delivery);//prepare query
