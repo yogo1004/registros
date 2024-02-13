@@ -100,8 +100,9 @@ ob_start();
             <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite" data-live-search="true">
             <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
+                    var_dump($comites);
                     foreach ($comites as $comite) {
-                         if($comite['name'] == $cultos['name']){
+                         if($comite['name_comite'] == $cultos['name_comite']){
                             ?>
                             <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name_comite']?>" selected><?=$comite['name_comite']?></option>
                         <?php } else {  ?>

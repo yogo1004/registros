@@ -20,13 +20,13 @@ if (isset($_GET['action'])) {
 switch ($action) {
 
 
-case anunciosPage:
+case 'anunciosPage':
+
     anunciosPage();
     break;
 
     case 'signup':
 echo "<br>hola<br>";
-        
         home3($_POST["date"],$_POST["adultos"],$_POST["ninos"],$_POST["culto_id"],$_POST["name"],$_POST["services_id"],$_POST["firstname"],$_POST["users_id"],$_POST['id'],$_POST['service'],$_POST['first'],$_POST['last'],$_POST["comite"]);
         break;
     case 'deleteData':
