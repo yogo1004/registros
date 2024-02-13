@@ -18,7 +18,6 @@ function home2()
             'date' => $_SESSION["date"]
         ];
     }
-
        
    
     $datas = getDataByDate($_SESSION["date"]);
@@ -85,7 +84,6 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 {
     
     $comites = getComites();
-var_dump($comites);
     if(isset($_SESSION["date"])){
         $_SESSION["date_now"] = date("Y-m-d");
     }else{
@@ -121,42 +119,40 @@ var_dump($comites);
 
         if ($adultos != "" || $ninos != "" || isset($firstname)) {
 
-            if (isset($cultos['id']) == false) {
+            if (isset($cultos['id_event']) == false) {
                 $oneCulto = [
                     'date2' => $_SESSION["date"],
-                    'adultos' => $adultos,
-                    'ninos' => $ninos,
+                    'siblings' => $adultos,
+                    'friends' => $ninos,
                     'comite_id' => $comite_id
                 ];
 
 
                 if ($adultos == "") {
-                    $oneCulto['adultos'] = 0;
+                    $oneCulto['siblings'] = 0;
                 }
                 if ($ninos == "") {
-                    $oneCulto['ninos'] = 0;
+                    $oneCulto['friends'] = 0;
                 }
-
 
                 $id2 = createCulto($oneCulto);
 
                 $oneCulto['id'] = $id2;
-
             } else {
                 $oneCulto = [
                     'date2' => $_SESSION["date"],
-                    'adultos' => $adultos,
-                    'ninos' => $ninos,
-                    'id' => $cultos['id'],
+                    'siblings' => $adultos,
+                    'friends' => $ninos,
+                    'id' => $cultos['id_event'],
                     'comite_id' => $comite_id
                 ];
 
 
                 if ($adultos == "") {
-                    $oneCulto['adultos'] = 0;
+                    $oneCulto['siblings'] = 0;
                 }
                 if ($ninos == "") {
-                    $oneCulto['ninos'] = 0;
+                    $oneCulto['friends'] = 0;
                 }
                 updateCulto($oneCulto);
             }
@@ -176,8 +172,9 @@ var_dump($comites);
                         $oneUser = [
                             'users_id' => $users[$key]['id'],
                             'services_id' => $services[$key]['id'],
-                            'culte_id' => $oneCulto['id']
+                            'event_id' => $oneCulto['id']
                         ];
+                        
                         createData($oneUser);
                     }
                 } else {
@@ -221,7 +218,7 @@ var_dump($comites);
     $services = getServices();
 
     $cultos = getCulteByDate($_SESSION["date"]);
-    if (isset($cultos['id']) == false) {
+    if (isset($cultos['id_event']) == false) {
         $cultos = [
             'date' => $_SESSION["date"]
         ];

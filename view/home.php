@@ -93,14 +93,16 @@ ob_start();
     
             <br>
             <div class="row">
-            <input type="text" class="iptG form-control-lg col-5 mr-3" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["adultos"] ?>">
+            <input type="text" class="iptG form-control-lg col-5 mr-3" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
             <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
-                   value="<?= $cultos["ninos"] ?>"><br>
-            <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id"] ?>">
+                   value="<?= $cultos["friends"] ?>"><br>
+            <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
+        
             <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite" data-live-search="true">
             <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
-                    var_dump($comites);
+                    
+               
                     foreach ($comites as $comite) {
                          if($comite['name_comite'] == $cultos['name_comite']){
                             ?>
@@ -119,6 +121,7 @@ ob_start();
 
 
             <?php
+           //  var_dump($datas);
             foreach ($datas as $data) { ?>
 
        
@@ -127,6 +130,8 @@ ob_start();
                 <select class="bg-danger selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="name[]" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
+                    
+                   
                     foreach ($services as $service) {
                         if ($service['name'] == $data['name']) {
                             ?>
