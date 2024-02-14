@@ -45,7 +45,7 @@
                 ANUNCIOS
 </a>
            
-            <button style="width: 300px" type="button" class="btn btn-primary" data-target="#exampleModalCenter">
+            <button style="width: 300px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                 Créer un utilisateur
             </button>
 
