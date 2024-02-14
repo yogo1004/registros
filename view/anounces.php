@@ -26,10 +26,11 @@ ob_start();
   </thead>
   <tbody>
 
+
   <?php foreach($events as $key  => $oneEvent){ ?>
     <tr>
-      <th><?=$oneEvent['name']?></th>
-      <td><?=$oneEvent['date_event']?></td>
+      <th><?=$oneEvent['name_event']?></th>
+      <td><?=$oneEvent['date']?></td>
       <td><?=$oneEvent['time_init']?>-<?=$oneEvent['time_end']?></td>
       <td><?=$oneEvent['place']?></td>
       <td><?=$oneEvent['name_comite']?></td>

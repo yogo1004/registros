@@ -82,7 +82,7 @@ function getEventById($id_event)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE id_event =:id_event ';
+        $query = 'SELECT * FROM events WHERE id_event = :id_event;';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['id_event' => $id_event]);//execute query

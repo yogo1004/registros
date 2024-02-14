@@ -6,7 +6,7 @@ function home2($id_event)
 {
     // date("Y-m-d") "2023-02-22"
 
-
+ var_dump($id_event); 
 $event = getEventById($id_event);
 
 

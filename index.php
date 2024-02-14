@@ -26,7 +26,10 @@ case 'anunciosPage':
     break;
 
 case 'home':
-home2($_GET['id'] == "");
+ 
+ $id = $_GET['id'];
+ var_dump($id); 
+    home2($id);
 break;
     case 'signup':
      
