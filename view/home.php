@@ -18,18 +18,27 @@ ob_start();
 
 
         <div class="row">
-            <div class="col-12"><h5><?=$cultos['name_event']?></h5></div>
-        </div>
-        <div class="row">
-            <div class="col-6">
+            <div class="col-4"><h5><?=$cultos['name_event']?></h5></div>
+            <div class="col-4">
                 <input type="date" class="form-control" name="date" id="calendar" value="<?= $cultos["date"] ?>">
             </div>
-            <div class="col-6">
-                <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
-            </div>
+            <div class="col-4">
+                <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="time_init" data-live-search="true">
+                   <?php
+                    foreach ($Allcultos as $culto) {
+                         if($cultos['time_init'] == $culto['time_init']){
+                            ?>
+                            <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>" selected><?=$culto['time_init']?></option>
+                        <?php } else {  ?>
+                            <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>"><?=$culto['time_init']?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
+            </div>  
         </div>
         <div class="row">
-            <div class="col-6">
+        
+                        <div class="col-6">
                 <select class="bg-success selectpicker form-control-sm show-tick"   name="comite" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
@@ -46,18 +55,8 @@ ob_start();
                 </select>
             </div>
             <div class="col-6">
-                <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="time_init" data-live-search="true">
-                   <?php
-                    foreach ($Allcultos as $culto) {
-                         if($cultos['time_init'] == $culto['time_init']){
-                            ?>
-                            <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>" selected><?=$culto['time_init']?></option>
-                        <?php } else {  ?>
-                            <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>"><?=$culto['time_init']?></option>
-                        <?php } ?>
-                    <?php } ?>
-                </select>
-            </div>  
+                <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
+            </div>
         </div>
         <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
         <div id="hidde" hidden>
@@ -137,7 +136,7 @@ ob_start();
             Confirmer
     </button>
 
-        <div class="modal fade bg-info" id="exampleModalCenter" tabindex="-1" role="dialog"
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
