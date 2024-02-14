@@ -29,7 +29,8 @@ case 'home':
  
  $id = $_GET['id'];
  var_dump($id); 
-    home2($id);
+ var_dump($_GET['date']); 
+    home2($id, $_GET['date'], $_GET['date_old']);
 break;
     case 'signup':
      
@@ -51,7 +52,7 @@ break;
         addService($_POST['service']);
         break;
     default :
-        home2($_GET['id']  = "");
+        home2($_GET['id'], $_GET['date'],$_GET['date_old'] );
 
         break;
 }

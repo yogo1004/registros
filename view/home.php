@@ -14,16 +14,14 @@ ob_start();
 <div class="container justify-content-center">
 
 <div class="bg-warning  justify-content-center">
-<form method="post" class="justify-content-center d-flex flex-row" action="index.php?action=signup" id="form">
-
-<input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-       
-            <div class="bg-success"><h5><?=$cultos['name_event']?></h5></div>
+<form method="get" class="justify-content-center d-flex flex-row" action="index.php?action=home" id="formChange">
+ <input type="hidden" name="date_old" value="<?=$cultos["date"]?>">
+        <div class="bg-success"><h5><?=$cultos['name_event']?></h5></div>
             <div class="">
                 <input type="date" class="form-control" name="date" id="calendar" value="<?= $cultos["date"] ?>">
             </div>
             <div class="">
-                <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="time_init" data-live-search="true">
+                <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="id" data-live-search="true">
                    <?php
                     foreach ($Allcultos as $culto) {
                          if($cultos['time_init'] == $culto['time_init']){
@@ -35,11 +33,11 @@ ob_start();
                     <?php } ?>
                 </select>
             </div>  
-            </div>
+        </div>
 </form>
 </div>
 
-    <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-row"    >
+    <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-row">
    
 
         <div class="row">
@@ -230,6 +228,9 @@ ob_start();
         function fnEditProfilFirstname() {
             form.submit()
         }
+         function changeEvent() {
+            formChange.submit()
+        }
 
         function fnEditProfilFirstname2() {
             form2.submit()
@@ -310,8 +311,8 @@ ob_start();
            sel.addEventListener("click",fnEditProfilFirstname);
             save.addEventListener("click", fnEditProfilFirstname)
             save2.addEventListener("click", fnEditProfilFirstname)
-            calendar.addEventListener("input", fnEditProfilFirstname)
-            time_init.addEventListener("change", fnEditProfilFirstname)
+            calendar.addEventListener("input", changeEvent)
+            time_init.addEventListener("change", changeEvent)
             confirmer.addEventListener("click", fnEditProfilFirstname)
             addService.addEventListener("click", fnAddInputs)
             

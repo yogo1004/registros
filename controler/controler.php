@@ -2,21 +2,43 @@
 require "model/model.php";
 
 
-function home2($id_event)
+function home2($id_event, $date_event,$date_old)
 {
-    // date("Y-m-d") "2023-02-22"
-
- 
-$event = getEventById($id_event);
+    $event = getEventById($id_event);
 
     if ($id_event == NULL){
-         $date = date("Y-m-d");
+        $date = date("Y-m-d");
         $_SESSION["date_now"] = date("Y-m-d");
         $events = getCulteByDate($_SESSION["date_now"]);
         $event = $events[0];
+        var_dump("ID == NULL");
     } else{
-        $date = $event['date'];
-         $_SESSION["date_now"] = $event['date'];
+        if ($date_event !=  NULL) {
+
+            if($date_event == $date_old) {
+
+ var_dump("ID == OK   AND    DATE = OK");
+            $_SESSION["date_now"] = $date_event;
+            $date = $date_event;
+            } else{
+                    var_dump("ID == OK   AND    DATE = NULL  AND     DATE_OLD = NOTE SAME");
+            $yo = getCulteByDate($date_event);
+           
+            $_SESSION["date_now"] = $yo[0]['date'];
+            $date = $yo[0]['date'];
+            }
+
+           
+        }
+        else {  
+              var_dump("ID == OK   AND    DATE = NULL");
+            $yo = getCulteByDate($date_event);
+         
+            $_SESSION["date_now"] = $yo[0]['date'];
+            $date = $yo[0]['date'];
+        }
+
+        
     }
    
    
@@ -27,11 +49,14 @@ $event = getEventById($id_event);
      $comites = getComites();
     $Allcultos = getCulteByDate($_SESSION["date"]);
 
-      if ($id_event == NULL){
+      if ($id_event == NULL || $date_event != $date_old){
         $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
+
+         var_dump("ID ====================== NULL");
       }
       else{
         $cultos =  getCulteByDateAndTime($event['date'], $event['time_init'],$event['name_event']);
+        var_dump("ID ========== NOT  ============ NULL");
       }
      
 
@@ -143,12 +168,12 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
 
         $cultos = getCulteByDateAndTime($_SESSION["date"],$event['time_init'],$event['name_event']);
-
-        if ($adultos != "" || $ninos != "" || isset($firstname)) {
-
+      
+                var_dump($cultos);
+                
             if (isset($cultos['id_event']) == false) {
                 $oneCulto = [
-                    'name_event' => 'TESTE EVENT',
+                    'name_event' => '234234',
                     'date2' => $_SESSION["date"],   
                     'time_init' => $time_init_new,
                     'comite_id' => $comite_id,
@@ -171,7 +196,7 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                 $oneCulto = [
                     
                     'id' => $cultos['id_event'],
-                    'name_event' => 'TESTE EVENT234234',
+                    'name_event' => 'EVENT ' . substr(md5(rand()), 0, 9),
                     'date2' => $_SESSION["date"],
                     'time_init' => $time_init_new,
                     'comite_id' => $comite_id,
@@ -188,9 +213,6 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                 }
                 updateCulto($oneCulto);
             }
-        } else {
-
-        }
 
       
         if ($servicio_nombre != "") {
