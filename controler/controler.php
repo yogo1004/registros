@@ -7,31 +7,46 @@ function home2($id_event, $date_event,$date_old)
     $event = getEventById($id_event);
 
     if ($id_event == NULL){
-        $date = date("Y-m-d");
-        $_SESSION["date_now"] = date("Y-m-d");
-        $events = getCulteByDate($_SESSION["date_now"]);
+
+        if ($date_event !=  NULL) {
+        $date = $date_event;
+        $_SESSION["date_now"] = $date_event;
+       var_dump("ID_EVENT === NULL  AND   DATE_EVENT === NOT NULL");
+        } else {
+
+            $date = date("Y-m-d");
+            $_SESSION["date_now"] = date("Y-m-d");
+            var_dump("ID_EVENT === NULL  AND   DATE_EVENT === NULL");
+        }
+
+         $events = getCulteByDate($_SESSION["date_now"]);
         $event = $events[0];
-        var_dump("ID == NULL");
+        
     } else{
         if ($date_event !=  NULL) {
 
             if($date_event == $date_old) {
 
- var_dump("ID == OK   AND    DATE = OK");
+ var_dump("ID === NOT NULL   AND    DATE_EVENT === NOT NULL    AND     DATE_EVENT === DATE_OLD");
             $_SESSION["date_now"] = $date_event;
             $date = $date_event;
             } else{
-                    var_dump("ID == OK   AND    DATE = NULL  AND     DATE_OLD = NOTE SAME");
+                    var_dump("ID === NOT NULL   AND    DATE_EVENT === NOT NULL  AND     DATE_OLD = NOT SAME");
             $yo = getCulteByDate($date_event);
+           if($yo == null){
+                $_SESSION["date_now"] = $date_event;
+                $date = $date_event;
+           } else {
+                $_SESSION["date_now"] = $yo[0]['date'];
+                $date = $yo[0]['date'];
+           }
            
-            $_SESSION["date_now"] = $yo[0]['date'];
-            $date = $yo[0]['date'];
             }
 
            
         }
         else {  
-              var_dump("ID == OK   AND    DATE = NULL");
+              var_dump("ID === NOT NULL   AND    DATE_EVENT === NULL");
             $yo = getCulteByDate($date_event);
          
             $_SESSION["date_now"] = $yo[0]['date'];
@@ -52,11 +67,11 @@ function home2($id_event, $date_event,$date_old)
       if ($id_event == NULL || $date_event != $date_old){
         $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
 
-         var_dump("ID ====================== NULL");
+      //   var_dump("ID ====================== NULL");
       }
       else{
         $cultos =  getCulteByDateAndTime($event['date'], $event['time_init'],$event['name_event']);
-        var_dump("ID ========== NOT  ============ NULL");
+       // var_dump("ID ========== NOT  ============ NULL");
       }
      
 
