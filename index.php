@@ -51,7 +51,7 @@ break;
         addService($_POST['service']);
         break;
     default :
-        home2($_GET['id'] == "");
+        home2($_GET['id']  = "");
 
         break;
 }

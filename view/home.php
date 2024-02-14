@@ -8,100 +8,33 @@
 
 ob_start();
 ?>
-<div class="col-12 col-lg-8"  style="position: relative;bottom:0px;justify-content: center;align-items: center; height: 100%; ">
 
 
-<h5><?=$cultos['name_event']?></h5>
 
-    <form method="post" action="index.php?action=signup" id="form" class="d-flex justify-content-center w-100 h-100">
-        
-        <div id="form2" class="col-12">
-            <!-- Modal --> 
-            <div class="modal fade bg-info" id="exampleModalCenter" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un utilisateur</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-    
-                            <div class="form-row">
-                                <div class="col">
-                                    <input type="text" name="first" required class="form-control"
-                                           placeholder="Prénom">
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="last" required class="form-control"
-                                           placeholder="Nom de famille">
-                                </div>
-                            </div>
-    
-                        </div>
-                        <!-- Modal -->
-    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" id="save" class="btn btn-primary">Sauvegarder</button>
-                        </div>
-                    </div>
-                </div>
+<div class="container d-flex col-12 justify-content-center">
+    <form method="post" action="index.php?action=signup" id="form" class="">
+   
+
+
+
+        <div class="row">
+            <div class="col-12"><h5><?=$cultos['name_event']?></h5></div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <input type="date" class="form-control" name="date" id="calendar" value="<?= $cultos["date"] ?>">
             </div>
-            <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un utilisateur</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-    
-                            <div class="form-row">
-                                <div class="col">
-                                    <input type="text" name="service" required class="form-control"
-                                           placeholder="Nom du service">
-                                </div>
-                            </div>
-    
-                        </div>
-    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
-                            </button>
-                            <button type="button" id="save2" class="btn btn-primary">Sauvegarder</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-6">
+                <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6">
-                        <input type="date" class="form-control" name="date" id="calendar"
-                               value="<?= $cultos["date"] ?>">
-                    </div>
-                    <div class="col-6" style="background-color: rgba(255,255,255,0);right: 20px">
-                        <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
-                    </div>
-                </div>
-    
-    
-            <br>
-            <div class="row">
-            <input type="text" class="iptG form-control-lg col-5 mr-3" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
-            <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
-                   value="<?= $cultos["friends"] ?>"><br>
-            <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-            <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="comite" data-live-search="true">
-            <option class=""  value="" data-tokens="nada">nada</option>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <select class="bg-success selectpicker form-control-sm show-tick"   name="comite" data-live-search="true">
+                    <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
-                    
-               
+
+
                     foreach ($comites as $comite) {
                          if($comite['name_comite'] == $cultos['name_comite']){
                             ?>
@@ -110,12 +43,11 @@ ob_start();
                             <option value="<?=$comite['id_comite']?>" data-tokens="<?=$comite['name_comite']?>"><?=$comite['name_comite']?></option>
                         <?php } ?>
                     <?php } ?>
-            </select>
-
-         <select class="bg-success selectpicker form-control-sm show-tick col-sm-4 form-select-lg" id="time_init"  name="time_init" data-live-search="true">
-                    <?php
-                    
-
+                </select>
+            </div>
+            <div class="col-6">
+                <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="time_init" data-live-search="true">
+                   <?php
                     foreach ($Allcultos as $culto) {
                          if($cultos['time_init'] == $culto['time_init']){
                             ?>
@@ -124,65 +56,66 @@ ob_start();
                             <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>"><?=$culto['time_init']?></option>
                         <?php } ?>
                     <?php } ?>
-            </select>
+                </select>
+            </div>  
+        </div>
+        <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
+        <div id="hidde" hidden>
+            <div class="row">
 
-            <label for="appt">Select a time:</label>
-            <?=var_dump($cultos['time_init']);?>
-<input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>"> 
+                <div class="col-4">
+                    <input type="text" class="iptG form-control-lg col-5" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
+                </div>
+                <div class="col-4">
+                    <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
+                           value="<?= $cultos["friends"] ?>">
+                </div>
+                <div class="col-4" style="background-color: rgba(255,255,255,0);">
+                    <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
+                </div>
             </div>
-            </div>
-    <div class=" justify-content-center align-items-center ">
-
 
 
             <?php
-           //  var_dump($datas);
+                //  var_dump($datas);
             foreach ($datas as $data) { ?>
-
-       
-    
-                <!--      <input type="text" name="name[]" id="dd" title="coucou" value="<?= $data["name"] ?>" list="listName"> -->
-                <select class="bg-danger selectpicker form-control-sm show-tick col-sm-4 form-select-lg"   name="name[]" data-live-search="true">
-                    <option class=""  value="" data-tokens="nada">nada</option>
-                    <?php
-                    
-                   
-                    foreach ($services as $service) {
-                        if ($service['name'] == $data['name']) {
-                            ?>
-                            <option value="<?= $service['name'] ?>" data-tokens="<?= $service['name'] ?>"
-                                    selected ><?= $service['name'] ?></option>
-                        <?php } else {  ?>
-                            <option value="<?= $service['name'] ?>"
-                                    data-tokens="<?= $service['name'] ?>"><?= $service['name'] ?></option>
+            <div class="row justify-content-center align-items-center ">
+                <div class="col-6">
+                    <select class="bg-danger selectpicker show-tick"   name="name[]" data-live-search="true">
+                        <option class=""  value="" data-tokens="nada">nada</option>
+                        <?php
+                        foreach ($services as $service) {
+                            if ($service['name'] == $data['name']) {
+                                ?>
+                                <option value="<?= $service['name'] ?>" data-tokens="<?= $service['name'] ?>"
+                                        selected ><?= $service['name'] ?></option>
+                            <?php } else {  ?>
+                                <option value="<?= $service['name'] ?>"
+                                        data-tokens="<?= $service['name'] ?>"><?= $service['name'] ?></option>
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
-                </select>
-                <!--         <input type="text" name="firstname[]" id="dd" title="coucou"
-                   value="<?= $data["firstname"] ?> <?= $data["lastname"] ?>" list="listUserFirst"> -->
-
-                <select class="bg-warning selectpicker form-control-sm col-sm-4" name="firstname[]" data-live-search="true" id="select_id" >
-                    <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
-                    <?php
-                    foreach ($users as $user) {
-                        if ($user['id'] == $data['users_id']) {
-                            ?>
-                            <option
-                            
-                            value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                    data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                    selected
-                                    ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                        <?php } else {  ?>
-                            <option 
-                            
-                            value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                    data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <select class="bg-warning selectpicker show-tick" name="firstname[]" data-live-search="true" id="select_id" >
+                        <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
+                        <?php
+                        foreach ($users as $user) {
+                            if ($user['id'] == $data['users_id']) {
+                                ?>
+                                <option
+                                value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                                        data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                                        selected
+                                        ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
+                            <?php } else {  ?>
+                                <option 
+                                value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                                        data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
+                            <?php } ?>
                         <?php } ?>
-                    <?php } ?>
-                </select>
-                
-                <!--     <a type="button" href="index.php?action=deleteData&id=<?= $data["id"] ?>" class="btn btn-danger">X</a> -->
+                    </select>
+                </div>
                         <?php if( isset($data['services_id'])) { ?>
                 <input type="hidden" name="services_id[]" id="dd2" value="<?=$data["services_id"]?>">
                 <?php } ?>
@@ -192,17 +125,77 @@ ob_start();
                 <?php if( isset($data['id'])) {  ?>
                 <input type="hidden" name="id[]" id="dd4" value="<?=$data["id"]?>">
                 <?php } ?>
-                <br>
+            </div>
             <?php } ?>
+
+            <div class="" id="form2">
             </div>
         </div>
-     
-    </form>
-    <button id="confirmer" class="btn btn-primary btn-lg"
+          
+          <button id="confirmer" class="btn btn-primary btn-lg"
                 style="background-color: #00549b; height: 50px; width: 90%;margin-left: 15px; margin-right: 100px; color: white;text-align: center">
             Confirmer
     </button>
-    
+
+        <div class="modal fade bg-info" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un utilisateur</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="text" name="first" required class="form-control" placeholder="Prénom">
+                            </div>
+                            <div class="col">
+                                <input type="text" name="last" required class="form-control"  placeholder="Nom de famille">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" id="save" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Ajouter un service</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="text" name="service" required class="form-control"
+                                       placeholder="Nom du service">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
+                        </button>
+                        <button type="button" id="save2" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+ 
+    </form>
+</div>
    
 
     <datalist id="listName">
