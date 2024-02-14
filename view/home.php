@@ -11,18 +11,18 @@ ob_start();
 
 
 
-<div class="container d-flex col-12 justify-content-center">
-    <form method="post" action="index.php?action=signup" id="form" class="">
-   
+<div class="container justify-content-center">
 
+<div class="bg-warning  justify-content-center">
+<form method="post" class="justify-content-center d-flex flex-row" action="index.php?action=signup" id="form">
 
-
-        <div class="row">
-            <div class="col-4"><h5><?=$cultos['name_event']?></h5></div>
-            <div class="col-4">
+<input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
+       
+            <div class="bg-success"><h5><?=$cultos['name_event']?></h5></div>
+            <div class="">
                 <input type="date" class="form-control" name="date" id="calendar" value="<?= $cultos["date"] ?>">
             </div>
-            <div class="col-4">
+            <div class="">
                 <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="time_init" data-live-search="true">
                    <?php
                     foreach ($Allcultos as $culto) {
@@ -35,15 +35,19 @@ ob_start();
                     <?php } ?>
                 </select>
             </div>  
-        </div>
+            </div>
+</form>
+</div>
+
+    <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-row"    >
+   
+
         <div class="row">
         
-                        <div class="col-6">
+            <div class="col-6">
                 <select class="bg-success selectpicker form-control-sm show-tick"   name="comite" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
-
-
                     foreach ($comites as $comite) {
                          if($comite['name_comite'] == $cultos['name_comite']){
                             ?>
@@ -53,13 +57,14 @@ ob_start();
                         <?php } ?>
                     <?php } ?>
                 </select>
-            </div>
+                </div>
             <div class="col-6">
                 <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
             </div>
         </div>
-        <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-        <div id="hidde" hidden>
+<input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
+        
+        <div id="hidde">
             <div class="row">
 
                 <div class="col-4">
@@ -130,12 +135,7 @@ ob_start();
             <div class="" id="form2">
             </div>
         </div>
-          
-          <button id="confirmer" class="btn btn-primary btn-lg"
-                style="background-color: #00549b; height: 50px; width: 90%;margin-left: 15px; margin-right: 100px; color: white;text-align: center">
-            Confirmer
-    </button>
-
+     
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -194,8 +194,11 @@ ob_start();
  
  
     </form>
-</div>
-   
+         <button id="confirmer" form="form" class="btn btn-primary btn-lg"
+                style="background-color: #00549b; height: 50px; width: 90%;margin-left: 15px; margin-right: 100px; color: white;text-align: center">
+            Confirmer
+    </button>
+   </div>
 
     <datalist id="listName">
         <?php

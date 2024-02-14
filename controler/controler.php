@@ -8,7 +8,6 @@ function home2($id_event)
 
  
 $event = getEventById($id_event);
-var_dump($event); 
 
     if ($id_event == NULL){
          $date = date("Y-m-d");
@@ -106,12 +105,16 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
     $comites = getComites();
     $event = getEventById($time_init);
+
+ 
+
     if(isset($_SESSION["date"])){
         $_SESSION["date_now"] = date("Y-m-d");
     }else{
 
         $_SESSION["date_now"] = $_SESSION["date"];
     }
+   
 
     
     if(isset($firstname)){
@@ -181,9 +184,6 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                 if ($ninos == "") {
                     $oneCulto['friends'] = 0;
                 }
-                   echo "<br><br>STOP22<br>";
-        var_dump($oneCulto);
-echo "<br>STOP<br><br>";
                 updateCulto($oneCulto);
             }
         } else {
@@ -247,7 +247,13 @@ echo "<br>STOP<br><br>";
     $users = getUsers();
     $services = getServices();
 
-    $cultos = getCulteByDateAndTime($_SESSION["date"], $time_init_new);
+if( $event['time_init'] == NULL){
+  $cultos = getCulteByDateAndTime($_SESSION["date"], $time_init_new);
+}else {
+    $cultos = getCulteByDateAndTime($_SESSION["date"], $event['time_init']);
+}
+
+   
     if (isset($cultos['id_event']) == false) {
         $cultos = [
             'date' => $_SESSION["date"]
