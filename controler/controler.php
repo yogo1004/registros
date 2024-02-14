@@ -6,9 +6,9 @@ function home2($id_event)
 {
     // date("Y-m-d") "2023-02-22"
 
- var_dump($id_event); 
+ 
 $event = getEventById($id_event);
-
+var_dump($event); 
 
     if ($id_event == NULL){
          $date = date("Y-m-d");
@@ -25,7 +25,14 @@ $event = getEventById($id_event);
 
      $comites = getComites();
     $Allcultos = getCulteByDate($_SESSION["date"]);
-     $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init']);
+
+      if ($id_event == NULL){
+        $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init']);
+      }
+      else{
+        $cultos =  getCulteByDateAndTime($event['date'], $event['time_init']);
+      }
+     
 
 
 
