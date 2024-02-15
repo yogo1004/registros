@@ -10,16 +10,16 @@ ob_start();
 ?>
 
 
-
-<div class="container justify-content-center">
-
-<div class="bg-warning  justify-content-center">
-<form method="get" class="justify-content-center d-flex flex-row" action="index.php?action=home" id="formChange">
- <input type="hidden" name="date_old" value="<?=$cultos["date"]?>">
-        <div class="bg-success"><h5><?=$cultos['name_event']?></h5></div>
+    <div class="bg-warning  justify-content-center">
+        <form method="get" class="justify-content-center d-flex flex-row" action="index.php?action=home" id="formChange">
+            <?php if(array_key_exists('id_event', $cultos)){ ?>
+            <input type="hidden" name="date_old" value="<?=$cultos["date"]?>">
+            <div class="bg-success"><h5><?=$cultos['name_event']?></h5></div>
+            <?php } ?>
             <div class="">
                 <input type="date" class="form-control" name="date" id="calendar" value="<?= $cultos["date"] ?>">
             </div>
+            <?php if(array_key_exists('id_event', $cultos)){ ?>
             <div class="">
                 <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="id" data-live-search="true">
                    <?php
@@ -32,16 +32,14 @@ ob_start();
                         <?php } ?>
                     <?php } ?>
                 </select>
-            </div>  
-        </div>
-</form>
-</div>
+            </div>
+            <?php } ?>
+        </form>
+    </div>
 
-    <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-row">
-   
-
+    <?php  if(array_key_exists('id_event', $cultos)){ ?>
+    <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-column">
         <div class="row">
-        
             <div class="col-6">
                 <select class="bg-success selectpicker form-control-sm show-tick"   name="comite" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
@@ -55,83 +53,74 @@ ob_start();
                         <?php } ?>
                     <?php } ?>
                 </select>
-                </div>
+            </div>
             <div class="col-6">
                 <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
             </div>
         </div>
-<input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-        
-        <div id="hidde">
-            <div class="row">
-
-                <div class="col-4">
-                    <input type="text" class="iptG form-control-lg col-5" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
-                </div>
-                <div class="col-4">
-                    <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
-                           value="<?= $cultos["friends"] ?>">
-                </div>
-                <div class="col-4" style="background-color: rgba(255,255,255,0);">
-                    <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
-                </div>
+        <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
+        <div class="row">
+            <div class="col-4">
+                <input type="text" class="iptG form-control-lg col-5" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
             </div>
-
-
-            <?php
-                //  var_dump($datas);
-            foreach ($datas as $data) { ?>
-            <div class="row justify-content-center align-items-center ">
-                <div class="col-6">
-                    <select class="bg-danger selectpicker show-tick"   name="name[]" data-live-search="true">
-                        <option class=""  value="" data-tokens="nada">nada</option>
-                        <?php
-                        foreach ($services as $service) {
-                            if ($service['name'] == $data['name']) {
-                                ?>
-                                <option value="<?= $service['name'] ?>" data-tokens="<?= $service['name'] ?>"
-                                        selected ><?= $service['name'] ?></option>
-                            <?php } else {  ?>
-                                <option value="<?= $service['name'] ?>"
-                                        data-tokens="<?= $service['name'] ?>"><?= $service['name'] ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="col-6">
-                    <select class="bg-warning selectpicker show-tick" name="firstname[]" data-live-search="true" id="select_id" >
-                        <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
-                        <?php
-                        foreach ($users as $user) {
-                            if ($user['id'] == $data['users_id']) {
-                                ?>
-                                <option
-                                value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                        data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                        selected
-                                        ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                            <?php } else {  ?>
-                                <option 
-                                value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                        data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select>
-                </div>
-                        <?php if( isset($data['services_id'])) { ?>
-                <input type="hidden" name="services_id[]" id="dd2" value="<?=$data["services_id"]?>">
-                <?php } ?>
-                <?php if( isset($data['users_id'])) { ?>
-                <input type="hidden" name="users_id[]" id="dd3" value="<?=$data["users_id"]?>">
-                <?php } ?>
-                <?php if( isset($data['id'])) {  ?>
-                <input type="hidden" name="id[]" id="dd4" value="<?=$data["id"]?>">
-                <?php } ?>
+            <div class="col-4">
+                <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
+                       value="<?= $cultos["friends"] ?>">
             </div>
+            <div class="col-4" style="background-color: rgba(255,255,255,0);">
+                <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
+            </div>
+        </div>
+        <?php foreach ($datas as $data) { ?>
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-6">
+                <select class="bg-danger selectpicker show-tick"   name="name[]" data-live-search="true">
+                    <option class=""  value="" data-tokens="nada">nada</option>
+                    <?php
+                    foreach ($services as $service) {
+                        if ($service['name'] == $data['name']) {
+                            ?>
+                            <option value="<?= $service['name'] ?>" data-tokens="<?= $service['name'] ?>"
+                                    selected ><?= $service['name'] ?></option>
+                        <?php } else {  ?>
+                            <option value="<?= $service['name'] ?>"
+                                    data-tokens="<?= $service['name'] ?>"><?= $service['name'] ?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="col-6">
+                <select class="bg-warning selectpicker show-tick" name="firstname[]" data-live-search="true" id="select_id" >
+                    <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
+                    <?php
+                    foreach ($users as $user) {
+                        if ($user['id'] == $data['users_id']) {
+                            ?>
+                            <option
+                            value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                                    data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                                    selected
+                                    ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
+                        <?php } else {  ?>
+                            <option 
+                            value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                                    data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
+            </div>
+            <?php if( isset($data['services_id'])) { ?>
+            <input type="hidden" name="services_id[]" id="dd2" value="<?=$data["services_id"]?>">
             <?php } ?>
-
-            <div class="" id="form2">
-            </div>
+            <?php if( isset($data['users_id'])) { ?>
+            <input type="hidden" name="users_id[]" id="dd3" value="<?=$data["users_id"]?>">
+            <?php } ?>
+            <?php if( isset($data['id'])) {  ?>
+            <input type="hidden" name="id[]" id="dd4" value="<?=$data["id"]?>">
+            <?php } ?>
+        </div>
+        <?php } ?>
+        <div class="" id="form2">
         </div>
      
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -162,7 +151,6 @@ ob_start();
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -189,19 +177,15 @@ ob_start();
                 </div>
             </div>
         </div>
- 
- 
     </form>
-         <button id="confirmer" form="form" class="btn btn-primary btn-lg"
+
+    <button id="confirmer" form="form" class="btn btn-primary btn-lg"
                 style="background-color: #00549b; height: 50px; width: 90%;margin-left: 15px; margin-right: 100px; color: white;text-align: center">
             Confirmer
     </button>
-   </div>
-
     <datalist id="listName">
         <?php
         foreach ($services
-
         as $service){ ?>
         <option value="<?= $service['name'] ?>">
             <?php } ?>
@@ -209,7 +193,6 @@ ob_start();
     <datalist id="listUserFirst">
         <?php
         foreach ($users
-
         as $user){ ?>
         <option value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>">
             <?php } ?>
@@ -217,111 +200,11 @@ ob_start();
     <datalist id="listUserLast">
         <?php
         foreach ($users
-
         as $user){ ?>
         <option value="<?= $user['lastname'] ?>">
             <?php } ?>
     </datalist>
-</div>
-
-    <script>
-        function fnEditProfilFirstname() {
-            form.submit()
-        }
-         function changeEvent() {
-            formChange.submit()
-        }
-
-        function fnEditProfilFirstname2() {
-            form2.submit()
-        }
-
-        function fnEditProfilFirstname3() {
-            form3.submit()
-        }
-
-        function fnAddInputs() {
-            const userprofile = document.getElementById('form2');
-            console.log(userprofile)
-            let p = document.createElement("input");
-            let p2 = document.createElement("input");
-            let p4 = document.createElement("br");
-            console.log(userprofile.children.length)
-            p.id = userprofile.children.length+1
-            p.name = "name[]"
-            p.placeholder = "nom du service"
-            p.setAttribute("list", 'listName')
-            p.setAttribute("onblur", "fnNewInput(this.id)")
-            p.setAttribute("class", 'dropdown bootstrap-select')
-        //  p.setAttribute("size", '1')
-            p2.id = userprofile.children.length+2
-            p2.name = "firstname[]"
-            p2.style = ";left:5px;"
-            p2.placeholder = "nom et prénom"
-            p2.setAttribute("list", 'listUserFirst')
-            p2.setAttribute("onblur", "fnNewInput2(this.id)")
-            p2.setAttribute("class", 'dropdown bootstrap-select')
-        //  p2.setAttribute("size", '1')
-            
-            userprofile.appendChild(p)
-            userprofile.appendChild(p2)
-            userprofile.appendChild(p4)
-        }
-        function fnNewInput(x) {
-            let listName =  document.getElementById('listName').children;
-            let listName2 =  document.getElementById(x);
-            let listName3 =  document.getElementById(x).value;
-
-            console.log("length: "+listName.length);
-        
-            let y =false;
-            for (let i = 0; i < listName.length; i++) {
-               if(listName3 == listName[i].value){
-                y = true;
-                break;
-               }
-            }
-            if(!y){
-                listName2.value = "";
-            }
-        }
-        function fnNewInput2(x) {
-            let firstnames =  document.getElementById('listUserFirst').children;
-            let lastnames =  document.getElementById('listUserLast').children;
-            let listName2 =  document.getElementById(x);
-            let listName3 =  document.getElementById(x).value;
-        
-            let y =false;
-            for (let i = 0; i < firstnames.length; i++) {
-               if(listName3 == firstnames[i].value){
-                y = true;
-                break;
-               }
-            }
-            if(!y){
-                listName2.value = "";
-            }
-        }
-
-        function init() {
-            let sel = document.getElementById('select_id');
-            sel.onchange = function (){
-                console.log("test")
-            }
-           sel.addEventListener("click",fnEditProfilFirstname);
-            save.addEventListener("click", fnEditProfilFirstname)
-            save2.addEventListener("click", fnEditProfilFirstname)
-            calendar.addEventListener("input", changeEvent)
-            time_init.addEventListener("change", changeEvent)
-            confirmer.addEventListener("click", fnEditProfilFirstname)
-            addService.addEventListener("click", fnAddInputs)
-            
-
-        }
-
-        //lit tout l'html avant de lancer la fonction init
-        document.addEventListener("DOMContentLoaded", init)
-    </script>
+    <?php } ?>
 
 <?php
 $content2 = ob_get_clean();

@@ -11,12 +11,10 @@ function home2($id_event, $date_event,$date_old)
         if ($date_event !=  NULL) {
         $date = $date_event;
         $_SESSION["date_now"] = $date_event;
-       var_dump("ID_EVENT === NULL  AND   DATE_EVENT === NOT NULL");
         } else {
 
             $date = date("Y-m-d");
             $_SESSION["date_now"] = date("Y-m-d");
-            var_dump("ID_EVENT === NULL  AND   DATE_EVENT === NULL");
         }
 
          $events = getCulteByDate($_SESSION["date_now"]);
@@ -27,11 +25,9 @@ function home2($id_event, $date_event,$date_old)
 
             if($date_event == $date_old) {
 
- var_dump("ID === NOT NULL   AND    DATE_EVENT === NOT NULL    AND     DATE_EVENT === DATE_OLD");
             $_SESSION["date_now"] = $date_event;
             $date = $date_event;
             } else{
-                    var_dump("ID === NOT NULL   AND    DATE_EVENT === NOT NULL  AND     DATE_OLD = NOT SAME");
             $yo = getCulteByDate($date_event);
            if($yo == null){
                 $_SESSION["date_now"] = $date_event;
@@ -46,7 +42,6 @@ function home2($id_event, $date_event,$date_old)
            
         }
         else {  
-              var_dump("ID === NOT NULL   AND    DATE_EVENT === NULL");
             $yo = getCulteByDate($date_event);
          
             $_SESSION["date_now"] = $yo[0]['date'];
@@ -66,12 +61,9 @@ function home2($id_event, $date_event,$date_old)
 
       if ($id_event == NULL || $date_event != $date_old){
         $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
-
-      //   var_dump("ID ====================== NULL");
       }
       else{
         $cultos =  getCulteByDateAndTime($event['date'], $event['time_init'],$event['name_event']);
-       // var_dump("ID ========== NOT  ============ NULL");
       }
      
 
@@ -184,7 +176,6 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
         $cultos = getCulteByDateAndTime($_SESSION["date"],$event['time_init'],$event['name_event']);
       
-                var_dump($cultos);
                 
             if (isset($cultos['id_event']) == false) {
                 $oneCulto = [
