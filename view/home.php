@@ -23,6 +23,7 @@ ob_start();
             <div class="">
                 <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="id" data-live-search="true">
                    <?php
+                
                     foreach ($Allcultos as $culto) {
                          if($cultos['time_init'] == $culto['time_init']){
                             ?>

@@ -63,7 +63,7 @@ function getCulteByDateAndTime($date,$time_init,$name_event)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE date =:date3 AND time_init =:time_init AND name_event =:name_event';
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE date =:date3 AND time_init =:time_init AND name_event =:name_event  order by time_init';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['date3' => $date, 'time_init' => $time_init, 'name_event' => $name_event]);//execute query
@@ -84,7 +84,7 @@ function getCulteById($id_event)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE id_event =:id_event';
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE id_event =:id_event  order by time_init';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['id_event' => $id_event]);//execute query
@@ -103,7 +103,7 @@ function getEventById($id_event)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT * FROM events WHERE id_event = :id_event;';
+        $query = 'SELECT * FROM events WHERE id_event = :id_event  order by time_init';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['id_event' => $id_event]);//execute query
@@ -121,7 +121,7 @@ function getCulteByDate($date)
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE date =:date3 ';
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE date =:date3  order by time_init';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute(['date3' => $date]);//execute query
@@ -414,7 +414,7 @@ function getEvents()
     require "model/.constant.php";
     try {
         $dbh = getPDO();
-        $query = 'SELECT * FROM events e JOIN comites c ON e.comite_id = c.id_comite';
+        $query = 'SELECT * FROM events e JOIN comites c ON e.comite_id = c.id_comite order by time_init';
         $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
         //qu'il y a des choses incorrects
         $statment->execute();//execute query

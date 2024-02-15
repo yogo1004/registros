@@ -28,14 +28,35 @@ function home2($id_event, $date_event,$date_old)
             $_SESSION["date_now"] = $date_event;
             $date = $date_event;
             } else{
-            $yo = getCulteByDate($date_event);
-           if($yo == null){
-                $_SESSION["date_now"] = $date_event;
-                $date = $date_event;
-           } else {
-                $_SESSION["date_now"] = $yo[0]['date'];
-                $date = $yo[0]['date'];
-           }
+                var_dump("date_old", $date_old);
+                if($date_old == null){
+                    $yo = getCulteById($id_event);
+
+
+
+                      if($yo == null){
+                        $_SESSION["date_now"] = $date_event;
+                        $date = $date_event;
+                    } else {
+                        $_SESSION["date_now"] = $yo['date'];
+                        $date = $yo['date'];
+                    }
+                
+                }else{
+                    $yo = getCulteByDate($date_event);
+                        
+
+                      if($yo[0] == NULL){
+                       
+                        $_SESSION["date_now"] = $date_event;
+                        $date = $date_event;
+                    } else {
+                        $_SESSION["date_now"] = $yo[0]['date'];
+                        $date = $yo[0]['date'];
+                    }
+                }
+              
+          
            
             }
 
@@ -59,12 +80,31 @@ function home2($id_event, $date_event,$date_old)
      $comites = getComites();
     $Allcultos = getCulteByDate($_SESSION["date"]);
 
-      if ($id_event == NULL || $date_event != $date_old){
+
+    if($id_event == NULL ){
         $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
-      }
-      else{
-        $cultos =  getCulteByDateAndTime($event['date'], $event['time_init'],$event['name_event']);
-      }
+    } else{
+        if($date_event != $date_old){
+            if($date_old == NULL){
+            $cultos =  getCulteById($id_event);
+            }else{
+                $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
+            }
+        }else{
+            $cultos =  getCulteById($id_event);
+        }
+        
+    }
+
+
+/*
+      if ($id_event == NULL || $date_old == null){
+         $cultos =  getCulteById($id_event);
+        }else{
+            $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
+        }
+       
+      */
      
 
 
@@ -228,7 +268,7 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                             'services_id' => $services[$key]['id'],
                             'event_id' => $culto_id
                         ];
-                        var_dump($oneUser);
+                        
                         createData($oneUser);
                     }
                 } else {
