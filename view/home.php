@@ -40,8 +40,8 @@ ob_start();
 
     <?php  if(array_key_exists('id_event', $cultos)){ ?>
     <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-column">
-        <div class="row">
-            <div class="col-6">
+        <div class="row d-flex justify-content-center">
+            <div class="col-1">
                 <select class="bg-success selectpicker form-control-sm show-tick"   name="comite" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
@@ -55,26 +55,26 @@ ob_start();
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-6">
+            <div class="col-1">
                 <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
             </div>
         </div>
         <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-        <div class="row">
-            <div class="col-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-2">
                 <input type="text" class="iptG form-control-lg col-5" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
             </div>
-            <div class="col-4">
+            <div class="col-2">
                 <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
                        value="<?= $cultos["friends"] ?>">
             </div>
-            <div class="col-4" style="background-color: rgba(255,255,255,0);">
+            <div class="col-1" style="background-color: rgba(255,255,255,0);">
                 <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
             </div>
         </div>
         <?php foreach ($datas as $data) { ?>
-        <div class="row justify-content-center align-items-center ">
-            <div class="col-6">
+        <div class="row d-flex justify-content-center">
+            <div class="col-2">
                 <select class="bg-danger selectpicker show-tick"   name="name[]" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
@@ -90,7 +90,7 @@ ob_start();
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-6">
+            <div class="col-2">
                 <select class="bg-warning selectpicker show-tick" name="firstname[]" data-live-search="true" id="select_id" >
                     <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
                     <?php
