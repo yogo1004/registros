@@ -18,7 +18,10 @@ function home2($id_event, $date_event,$date_old)
         }
 
          $events = getCulteByDate($_SESSION["date_now"]);
-        $event = $events[0];
+         if(isset($events[0])){
+            $event = $events[0];
+         }
+        
         
     } else{
         if ($date_event !=  NULL) {
@@ -78,11 +81,15 @@ function home2($id_event, $date_event,$date_old)
     $services = getServices();
 
      $comites = getComites();
+     
     $Allcultos = getCulteByDate($_SESSION["date"]);
 
 
     if($id_event == NULL ){
-        $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
+        if(!empty($Allcultos)){
+            $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
+        }
+        
     } else{
         if($date_event != $date_old){
             if($date_old == NULL){
@@ -109,12 +116,13 @@ function home2($id_event, $date_event,$date_old)
 
 
 
+        if(isset($cultos) == false){
     
-    if (!$cultos) {
-        $cultos = [
-            'date' => $_SESSION["date"]
-        ];
-    }
+                $cultos = [
+                    'date' => $_SESSION["date"]
+                ];
+    
+        }
  
 
     $datas = getDataByDate($cultos["date"], $cultos["time_init"]);

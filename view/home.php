@@ -5,7 +5,7 @@
  *USER:marwan
  *DATE:14.05.2020
  */
-
+$title = "home";
 ob_start();
 ?>
 
