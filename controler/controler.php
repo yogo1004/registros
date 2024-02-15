@@ -176,11 +176,29 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
         $cultos = getCulteById($culto_id);
       
-      //////////////////// CREATE OR UPDATE          
+      //////////////////// CREATE OR UPDATE         'EVENT ' . substr(md5(rand()), 0, 9)  
             if (isset($cultos['id_event']) == false) {
        
             } else {
-              
+                  $oneCulto = [
+                    
+                    'id' => $culto_id,
+                    'name_event' => $cultos['name_event'],
+                    'date2' => $cultos['date'],
+                    'time_init' => $cultos['time_init'],
+                    'comite_id' => $cultos['comite_id'],
+                    'siblings' => $adultos,
+                    'friends' => $ninos
+                ];
+
+
+                if ($adultos == "") {
+                    $oneCulto['siblings'] = 0;
+                }
+                if ($ninos == "") {
+                    $oneCulto['friends'] = 0;
+                }
+                updateCulto($oneCulto);
             }
     
       $oneCulto = [
