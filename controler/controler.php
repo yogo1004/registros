@@ -174,56 +174,32 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
     if (!($culto_id == "" &&( $ninos == "" || $ninos == 0) && ( $adultos == "" || $adultos == 0) && empty($firstname))) {
 
 
-        $cultos = getCulteByDateAndTime($_SESSION["date"],$event['time_init'],$event['name_event']);
+        $cultos = getCulteById($culto_id);
       
-                
+      //////////////////// CREATE OR UPDATE          
             if (isset($cultos['id_event']) == false) {
-                $oneCulto = [
-                    'name_event' => '234234',
-                    'date2' => $_SESSION["date"],   
-                    'time_init' => $time_init_new,
-                    'comite_id' => $comite_id,
-                    'siblings' => $adultos,
-                    'friends' => $ninos,
-                ];
-
-
-                if ($adultos == "") {
-                    $oneCulto['siblings'] = 0;
-                }
-                if ($ninos == "") {
-                    $oneCulto['friends'] = 0;
-                }
-
-                $id2 = createCulto($oneCulto);
-
-                $oneCulto['id'] = $id2;
+       
             } else {
-                $oneCulto = [
+              
+            }
+    
+      $oneCulto = [
                     
-                    'id' => $cultos['id_event'],
-                    'name_event' => 'EVENT ' . substr(md5(rand()), 0, 9),
-                    'date2' => $_SESSION["date"],
-                    'time_init' => $time_init_new,
-                    'comite_id' => $comite_id,
+                    'id' => $culto_id,
+                    'name_event' => $cultos['name_event'],
+                    'date2' => $cultos["date"],
+                    'time_init' => $cultos['time_init'],
+                    'comite_id' => $cultos['comite_id'],
                     'siblings' => $adultos,
                     'friends' => $ninos
                 ];
 
 
-                if ($adultos == "") {
-                    $oneCulto['siblings'] = 0;
-                }
-                if ($ninos == "") {
-                    $oneCulto['friends'] = 0;
-                }
-                updateCulto($oneCulto);
-            }
-
-      
+               
         if ($servicio_nombre != "") {
             $length = count($servicio_nombre);
             for ($key = 0; $key < $length; $key++) {
+                 
                 $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
 
                 if ($id[$key] == null && $isExist == null) {
@@ -232,9 +208,9 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                         $oneUser = [
                             'users_id' => $users[$key]['id'],
                             'services_id' => $services[$key]['id'],
-                            'event_id' => $oneCulto['id']
+                            'event_id' => $culto_id
                         ];
-                        
+                        var_dump($oneUser);
                         createData($oneUser);
                     }
                 } else {
@@ -532,3 +508,54 @@ function anunciosPage(){
     $events = getEvents();
     require_once 'view/anounces.php';
 }
+/*
+function createEvent(){
+             $oneCulto = [
+                    'name_event' => '234234',
+                    'date2' => $_SESSION["date"],   
+                    'time_init' => $time_init_new,
+                    'comite_id' => $comite_id,
+                    'siblings' => $adultos,
+                    'friends' => $ninos,
+                ];
+
+
+                if ($adultos == "") {
+                    $oneCulto['siblings'] = 0;
+                }
+                if ($ninos == "") {
+                    $oneCulto['friends'] = 0;
+                }
+
+                $id2 = createCulto($oneCulto);
+
+                $oneCulto['id'] = $id2;
+}
+
+function updateEvent(){
+      $oneCulto = [
+                    
+                    'id' => $cultos['id_event'],
+                    'name_event' => 'EVENT ' . substr(md5(rand()), 0, 9),
+                    'date2' => $_SESSION["date"],
+                    'time_init' => $time_init_new,
+                    'comite_id' => $comite_id,
+                    'siblings' => $adultos,
+                    'friends' => $ninos
+                ];
+
+
+                if ($adultos == "") {
+                    $oneCulto['siblings'] = 0;
+                }
+                if ($ninos == "") {
+                    $oneCulto['friends'] = 0;
+                }
+                updateCulto($oneCulto);
+}
+
+
+
+
+
+ */

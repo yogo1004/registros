@@ -77,6 +77,27 @@ function getCulteByDateAndTime($date,$time_init,$name_event)
     }
 }
 
+
+
+function getCulteById($id_event)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = 'SELECT events.*, comites.name_comite, comites.id_comite FROM events JOIN comites ON comites.id_comite = events.comite_id WHERE id_event =:id_event';
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['id_event' => $id_event]);//execute query
+        $queryResult = $statment->fetch(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
 function getEventById($id_event)
 {
     require "model/.constant.php";
