@@ -5,7 +5,7 @@
  *USER:marwan
  *DATE:14.05.2020
  */
-
+$title = "Anuncios";
 ob_start();
 ?>
 <div class="col-12 col-lg-8"  style="position: relative;bottom:0px;justify-content: center;align-items: center; height: 100%; ">

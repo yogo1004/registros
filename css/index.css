@@ -1,7 +1,9 @@
 .iptG{
     border-radius: 5px;
 }
-
+#calendar{
+  width:200px;
+}
 .col-sm-3half, .col-sm-8half {
     position: relative;
     min-height: 1px;
@@ -32,12 +34,12 @@ option {
     text-overflow: ellipsis;
 }
 .filter-option {
-    font-size: 25px;
+    font-size: 15px;
 }
 button {
-    font-size: 25px !important;
+    font-size: 15px !important;
 }
 input {
-    font-size: 25px !important;
+    font-size: 15px !important;
     
 }

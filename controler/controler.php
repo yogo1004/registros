@@ -103,21 +103,20 @@ function home2($id_event, $date_event,$date_old)
         
     }
 
-
 /*
+
       if ($id_event == NULL || $date_old == null){
          $cultos =  getCulteById($id_event);
         }else{
             $cultos =  getCulteByDateAndTime($Allcultos[0]['date'], $Allcultos[0]['time_init'],$Allcultos[0]['name_event']);
         }
        
-      */
-     
+   */
+    //  var_dump("CULTOS befor:::",$cultos);
 
-
-
-        if(isset($cultos) == false){
-    
+  
+        if(isset($cultos) == null || $cultos == false){
+    //  var_dump("CULTOS:::",$cultos);
                 $cultos = [
                     'date' => $_SESSION["date"]
                 ];
@@ -125,7 +124,10 @@ function home2($id_event, $date_event,$date_old)
         }
  
 
+if(array_key_exists('time_init', $cultos)){
     $datas = getDataByDate($cultos["date"], $cultos["time_init"]);
+
+    
     $base = [
         0 => [
             'name' => 'Recepción',
@@ -180,6 +182,8 @@ function home2($id_event, $date_event,$date_old)
 
         }
     }
+}
+
     require_once 'view/home.php';
 }
 
@@ -330,7 +334,7 @@ if( $event['time_init'] == NULL){
 }
 
    
-    if (isset($cultos['id_event']) == false) {
+    if (isset($cultos) == false) {
         $cultos = [
             'date' => $_SESSION["date"]
         ];

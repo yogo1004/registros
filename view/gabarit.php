@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="es">
 
 <head>
     <title><?= $title; ?> </title>
     <meta charset="utf-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
           <link href="../css/index.css" rel="stylesheet">
 
@@ -19,47 +18,102 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+
+ <!-- Navbar -->
 
 
 </head>
 
-<body class="d-flex justify-content-center">
-    <div id="sub-body" class="h-100 col-12 " style="position: absolute;   height: 100%;  background: linear-gradient(#f8e5e5,white);
-       overflow: auto;">
-       <div style="width: 100%;  height: 150px"
-             class="shadow p-3 bg-danger rounded  d-flex justify-content-center">
-            <p style="text-align: center; width:400px;font-family: 'Arial' ;color: #808080;top: 5px;left: 20px; font-size: 30px; ">
-                <a href="index.php?action=home">ASSISTENCE EEANJESUS</a>
-            </p>
-            <div style="position: absolute; top: 75px;">
-                <a style="width: 300px; height: 50px" href="index.php?action=anunciosPage" class="btn btn-warning"  >
-                    ANUNCIOS</a>
+<body class="">
 
-                <button style="width: 300px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+
+
+ <nav class="navbar navbar-expand-lg   bg-success navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Logo</a>
+    <h3><?=$cultos['name_event']?></h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+<div class="dropdown  d-none d-lg-block">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <?=date('H:i', strtotime($cultos['time_init']))?>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <?php  foreach ($Allcultos as $culto) {  
+            if($cultos['time_init'] != $culto['time_init']){ ?>
+          <button class="dropdown-item" type="button"><a class="dropdown-item" href="index.php?action=home&id=<?=$culto['id_event']?>&date_old=<?= $cultos["date"]?>&date=<?=$culto["date"]?>"><?=date('H:i', strtotime($culto['time_init']))?></a></button>
+
+          <?php } }?>
+  </div>
+</div>
+
+    <input type="date" class="form-control d-none d-lg-block" placeholder="YYYY-MM-DD" name="date" id="calendar2" value="<?= $cultos["date"] ?>">
+</a>
+
+  
+    <div class="collapse navbar-collapse  justify-content-end" id="collapsibleNavbar">
+    <a class="nav-link" id="aDate" href="index.php?action=home&id=<?=$culto['id_event']?>&date_old=<?= $cultos["date"]?>&date="></a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="index.php?action=anunciosPage" class="btn btn-warning"  >
+                    ANUNCIOS</a>
+        </li>
+        <li class="nav-item">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                     Créer un utilisateur
                 </button>
-
-
-                <button style="width: 300px" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+        </li>
+        <li class="nav-item">
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
                     Créer un service
                 </button>
-            </div>
-        </div> 
+        </li>
+          <li class="nav-item">
+                <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
+           
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+<nav class="navbar navbar-light bg-light d-block d-lg-none">
+  <div class="container-fluid">
+   <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="date" id="calendar" value="<?= $cultos["date"] ?>">
+</a>
+
+<?php if($title == "home"){ ?>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <?=date('H:i', strtotime($cultos['time_init']))?>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <?php  foreach ($Allcultos as $culto) {  
+            if($cultos['time_init'] != $culto['time_init']){ ?>
+          <button class="dropdown-item" type="button"><a class="dropdown-item" href="index.php?action=home&id=<?=$culto['id_event']?>&date_old=<?= $cultos["date"]?>&date=<?=$culto["date"]?>"><?=date('H:i', strtotime($culto['time_init']))?></a></button>
+
+          <?php } }?>
+  </div>
+</div>
+<?php } ?>
+  </div>
+</nav>
+    <div id="sub-body" class="h-100 col-12 " style="background: linear-gradient(#f8e5e5,white);">
         <div class="row">
-            <div class="col-lg-2 margin-top: 10%;"></div>
+            <div class="col-lg-2 "></div>
                 <?= $content2; ?>
             <div class="col-lg-2"></div>
         </div>
     </div>
+
+ <!-- A grey horizontal navbar that becomes vertical on small screens -->
 
 </body>
 
@@ -70,6 +124,12 @@
         }
          function changeEvent() {
             formChange.submit()
+        }
+        function changeCalendar(){
+         var href = aDate.getAttribute("href");
+         var calendarValue = calendar.value;
+         document.getElementById("aDate").href =href +calendarValue;
+         document.getElementById('aDate').click()
         }
 
         function fnEditProfilFirstname2() {
@@ -144,6 +204,7 @@
         }
 
         function init() {
+
             var sel = document.getElementById('select_id')
             var id_save = document.getElementById('save')
             var id_save2 = document.getElementById('save2')
@@ -175,7 +236,7 @@
             }
 
             if(id_calendar != null){
-            id_calendar.addEventListener("input", changeEvent)
+            id_calendar.addEventListener("input", changeCalendar)
             }
 
         }

@@ -10,21 +10,19 @@ ob_start();
 ?>
 
 
-    <div class="bg-warning  justify-content-center">
+   <!-- <div class="bg-warning  justify-content-center">
         <form method="get" class="justify-content-center d-flex flex-row" action="index.php?action=home" id="formChange">
             <?php if(array_key_exists('id_event', $cultos)){ ?>
             <input type="hidden" name="date_old" value="<?=$cultos["date"]?>">
             <div class="bg-success"><h5><?=$cultos['name_event']?></h5></div>
             <?php } ?>
             <div class="">
-                <input type="date" class="form-control" name="date" id="calendar" value="<?= $cultos["date"] ?>">
+                <input type="date" class="form-control" name="date" id="calendar2" value="<?= $cultos["date"] ?>">
             </div>
             <?php if(array_key_exists('id_event', $cultos)){ ?>
             <div class="">
                 <select class="bg-success selectpicker form-control-sm show-tick" id="time_init"  name="id" data-live-search="true">
-                   <?php
-                
-                    foreach ($Allcultos as $culto) {
+                   <?php  foreach ($Allcultos as $culto) {
                          if($cultos['time_init'] == $culto['time_init']){
                             ?>
                             <option value="<?=$culto['id_event']?>" data-tokens="<?=$culto['time_init']?>" selected><?=$culto['time_init']?></option>
@@ -36,12 +34,12 @@ ob_start();
             </div>
             <?php } ?>
         </form>
-    </div>
+    </div> -->
 
     <?php  if(array_key_exists('id_event', $cultos)){ ?>
     <form method="post" action="index.php?action=signup" id="form" class="justify-content-center d-flex flex-column">
         <div class="row d-flex justify-content-center">
-            <div class="col-1">
+            <!--<div class="col-1">
                 <select class="bg-success selectpicker form-control-sm show-tick"   name="comite" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
@@ -57,20 +55,20 @@ ob_start();
             </div>
             <div class="col-1">
                 <input type="time" id="appt" name="time_init_new" value="<?=$cultos['time_init']?>">        
-            </div>
+            </div>-->
         </div>
         <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-        <div class="row d-flex justify-content-center">
-            <div class="col-2">
-                <input type="text" class="iptG form-control-lg col-5" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
+        <div class="row d-flex justify-content-start bg-danger">
+            <div class="col-6">
+                <input type="text" class="iptG" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
             </div>
-            <div class="col-2">
-                <input type="text" placeholder="quantité enfants" name="ninos" id="ninos" class=" form-control-lg col-5"
+            <div class="col-6">
+                <input type="text" placeholder="quantité enfants" name="ninos" id="ninos"
                        value="<?= $cultos["friends"] ?>">
             </div>
-            <div class="col-1" style="background-color: rgba(255,255,255,0);">
-                <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
-            </div>
+ 
+        </div>
+        <div class="" id="form2">
         </div>
         <?php foreach ($datas as $data) { ?>
         <div class="row d-flex justify-content-center">
@@ -121,8 +119,7 @@ ob_start();
             <?php } ?>
         </div>
         <?php } ?>
-        <div class="" id="form2">
-        </div>
+        
      
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
