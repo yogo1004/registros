@@ -86,7 +86,7 @@
 </nav> 
 <nav class="navbar navbar-light bg-light d-block d-lg-none">
   <div class="container-fluid">
-   <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="date" id="calendar" value="<?= $cultos["date"] ?>">
+   <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="date" id="calendar2" value="<?= $cultos["date"] ?>">
 </a>
 
 <?php if($title == "home"){ ?>
@@ -126,10 +126,26 @@
             formChange.submit()
         }
         function changeCalendar(){
-         var href = aDate.getAttribute("href");
+        console.log("HELLO22");
+          var id_aDate = document.getElementById('aDate')
+         var href = id_aDate.getAttribute("href");
          var calendarValue = calendar.value;
-         document.getElementById("aDate").href =href +calendarValue;
+         var newValue = href +calendarValue;
+         console.log("newValue = " + newValue);
+         document.getElementById("aDate").href =newValue;
          document.getElementById('aDate').click()
+         
+        }
+           function changeCalendar2(){
+        console.log("HELLO22");
+          var id_aDate = document.getElementById('aDate')
+         var href = id_aDate.getAttribute("href");
+         var calendarValue = calendar2.value;
+         var newValue = href +calendarValue;
+         console.log("newValue = " + newValue);
+         document.getElementById("aDate").href =newValue;
+         document.getElementById('aDate').click()
+         
         }
 
         function fnEditProfilFirstname2() {
@@ -212,6 +228,8 @@
             var id_confirmer = document.getElementById('confirmer')
             var id_addService = document.getElementById('addService')
             var id_calendar = document.getElementById('calendar')
+            var id_calendar2 = document.getElementById('calendar2')
+          
             if(sel != null){
                 sel.addEventListener("click",fnEditProfilFirstname)
             }
@@ -237,6 +255,9 @@
 
             if(id_calendar != null){
             id_calendar.addEventListener("input", changeCalendar)
+            }
+            if(id_calendar2 != null){
+            id_calendar2.addEventListener("input", changeCalendar2)
             }
 
         }
