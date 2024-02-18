@@ -13,7 +13,7 @@ session_start();
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 } else {
-    $action = 'home';
+    $action = 'anunciosPage';
 }
 
 
@@ -66,24 +66,7 @@ break;
         addService($_POST['service']);
         break;
     default :
-         $id = NULL;
- $date = NULL;
- $date_old = NULL;
-
- if(isset($_GET['id'])){
-    $id = $_GET['id'];
- }
-
- if(isset($_GET['date'])){
-    $date = $_GET['date'];
- }
-
-  if(isset($_GET['date_old'])){
-    $date_old = $_GET['date_old'];
- }
-
-
-    home2($id, $date, $date_old);
+anunciosPage();
 
         break;
 }

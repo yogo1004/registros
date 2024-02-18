@@ -76,7 +76,7 @@
                     Créer un service
                 </button>
         </li>
-        <li class="nav-item">
+        <li class="nav-item  d-none d-lg-block">
           <input id="addService" type="button" class="btn btn-warning" value="+ servicio">
         </li>
        
