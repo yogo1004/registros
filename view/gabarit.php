@@ -36,11 +36,13 @@
 
  <nav class="navbar navbar-expand-lg   bg-success navbar-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="index.php?action=anunciosPage">Anuncios</a>
     <h3><?=$cultos['name_event']?></h3>
+      <?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <?php } ?>
 
 <div class="dropdown  d-none d-lg-block">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,17 +57,14 @@
   </div>
 </div>
 
-    <input type="date" class="form-control d-none d-lg-block" placeholder="YYYY-MM-DD" name="date" id="calendar2" value="<?= $cultos["date"] ?>">
+    <input type="date" class="form-control d-none d-lg-block" placeholder="YYYY-MM-DD" name="date" id="calendar" value="<?= $cultos["date"] ?>">
 </a>
-
-  
-    <div class="collapse navbar-collapse  justify-content-end" id="collapsibleNavbar">
-    <a class="nav-link" id="aDate" href="index.php?action=home&id=<?=$culto['id_event']?>&date_old=<?= $cultos["date"]?>&date="></a>
+<a class="nav-link" id="aDate" href="index.php?action=home&id=<?=$culto['id_event']?>&date_old=<?= $cultos["date"]?>&date="></a>
+  <?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>
+  <div class="collapse navbar-collapse  justify-content-end" id="collapsibleNavbar">
+    
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="index.php?action=anunciosPage" class="btn btn-warning"  >
-                    ANUNCIOS</a>
-        </li>
+      
         <li class="nav-item">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                     Créer un utilisateur
@@ -76,21 +75,19 @@
                     Créer un service
                 </button>
         </li>
-          <li class="nav-item">
-                <input id="addService" type="button" class="btn btn-warning" value="ajouter un service">
-           
-        </li>
+       
       </ul>
     </div>
+     <?php } ?>
   </div>
 </nav> 
 <nav class="navbar navbar-light bg-light d-block d-lg-none">
-  <div class="container-fluid">
-   <input type="date" class="form-control" placeholder="YYYY-MM-DD" name="date" id="calendar2" value="<?= $cultos["date"] ?>">
-</a>
-
-<?php if($title == "home"){ ?>
-<div class="dropdown">
+  <div class="container-fluid row">
+  <div class="col-6">
+    <input type="date" class="form-control" name="date" id="calendar2" value="<?= $cultos["date"] ?>">
+  </div>
+<?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>
+<div class="dropdown col-3">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <?=date('H:i', strtotime($cultos['time_init']))?>
   </button>
@@ -101,6 +98,9 @@
 
           <?php } }?>
   </div>
+</div>
+<div class="col-3">
+    <input id="addService" type="button" class="btn btn-warning" value="+ servicio">
 </div>
 <?php } ?>
   </div>
