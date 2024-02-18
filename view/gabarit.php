@@ -43,7 +43,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <?php } ?>
-
+  <?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>
 <div class="dropdown  d-none d-lg-block">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <?=date('H:i', strtotime($cultos['time_init']))?>
@@ -56,6 +56,7 @@
           <?php } }?>
   </div>
 </div>
+<?php } ?>
 
     <input type="date" class="form-control d-none d-lg-block" placeholder="YYYY-MM-DD" name="date" id="calendar" value="<?= $cultos["date"] ?>">
 </a>
@@ -74,6 +75,9 @@
          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
                     Créer un service
                 </button>
+        </li>
+        <li class="nav-item">
+          <input id="addService" type="button" class="btn btn-warning" value="+ servicio">
         </li>
        
       </ul>
