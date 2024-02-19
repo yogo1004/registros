@@ -274,7 +274,7 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
                 if ($id[$key] == null && $isExist == null) {
                    
-                    if($users[$key]['id'] != '' && $users[$key]['id'] != null && $users[$key]['id'] != false){
+                    if(array_key_exists('id', $users[$key])){
                         $oneUser = [
                             'users_id' => $users[$key]['id'],
                             'services_id' => $services[$key]['id'],

@@ -51,9 +51,6 @@ break;
 if(!isset($_POST['date'])){
     $date = $_POST['date'];
  }
- if(!isset($_POST['date'])){
-    $date = $_POST['date'];
- }
  if(!isset($_POST['comite'])){
     $comite = $_POST['comite'];
  }
