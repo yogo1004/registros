@@ -58,13 +58,13 @@ ob_start();
             </div>-->
         </div>
         <input type="hidden" name="culto_id" id="ninos" value="<?= $cultos["id_event"] ?>">
-        <div class="row d-flex justify-content-start bg-danger">
-            <div class="col-6">
+        <div class="row d-flex justify-content-center ">
+            <div class="col-5 p-0 bg-warning   d-flex flex-row-md-reverse">
                 <input type="text" class="iptG" placeholder="quantité adultes" name="adultos" id="dd" value="<?= $cultos["siblings"] ?>">
             </div>
-            <div class="col-6">
-                <input type="text" placeholder="quantité enfants" name="ninos" id="ninos"
-                       value="<?= $cultos["friends"] ?>">
+            <div class="col-5 p-0 d-flex flex-row bg-success">
+                <input type="text" class="iptG col-12" placeholder="quantité enfants" name="ninos" id="ninos"
+                       value="<?= $cultos["friends"] ?>"> 
             </div>
  
         </div>
@@ -72,8 +72,8 @@ ob_start();
         </div>
         <?php foreach ($datas as $data) { ?>
         <div class="row d-flex justify-content-center">
-            <div class="col-2">
-                <select class="bg-danger selectpicker show-tick"   name="name[]" data-live-search="true">
+            <div class="col-5 p-0 d-flex flex-row-reverse">
+                <select class="bg-danger selectpicker show-tick col-12"   name="name[]" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
                     foreach ($services as $service) {
@@ -88,19 +88,19 @@ ob_start();
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-2">
-                <select class="bg-warning selectpicker show-tick" name="firstname[]" data-live-search="true" id="select_id" >
+            <div class="col-5 p-0">
+                <select class="bg-warning selectpicker show-tick col-12" name="firstname[]" data-live-search="true" id="select_id" >
                     <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
                     <?php
                     foreach ($users as $user) {
-                        if ($user['id'] == $data['users_id']) {
+                      if(array_key_exists('users_id', $data)) { if ($user['id'] == $data['users_id']) {
                             ?>
                             <option
                             value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
                                     data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
                                     selected
                                     ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                        <?php } else {  ?>
+                        <?php }} else {  ?>
                             <option 
                             value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
                                     data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>

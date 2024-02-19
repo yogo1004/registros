@@ -283,8 +283,9 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                         
                         createData($oneUser);
                     }
+         
                 } else {
-                        if ($users[$key]['id'] == false && $services[$key]['id'] == false) {
+                        if (!array_key_exists('id', $users[$key]) && !array_key_exists('id', $services[$key]) ) {
                             deleteData3($id[$key]);
                         } else {
                             

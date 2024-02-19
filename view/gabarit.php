@@ -37,7 +37,10 @@
  <nav class="navbar navbar-expand-lg   bg-success navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php?action=anunciosPage">Anuncios</a>
+    <?php if(isset($cultos)){ if(array_key_exists('name_event', $cultos)) { ?>
     <h3><?=$cultos['name_event']?></h3>
+
+    <?php } } ?>
       <?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -57,9 +60,11 @@
   </div>
 </div>
 <?php } ?>
-
+<?php if(!isset($cultos)){ $cultos["date"] = "";}?>
     <input type="date" class="form-control d-none d-lg-block" placeholder="YYYY-MM-DD" name="date" id="calendar" value="<?= $cultos["date"] ?>">
+    
 </a>
+<?php if(!isset($culto)){ $culto['id_event']= "";}?>
 <a class="nav-link" id="aDate" href="index.php?action=home&id=<?=$culto['id_event']?>&date_old=<?= $cultos["date"]?>&date="></a>
   <?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>
   <div class="collapse navbar-collapse  justify-content-end" id="collapsibleNavbar">

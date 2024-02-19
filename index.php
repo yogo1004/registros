@@ -47,14 +47,32 @@ case 'home':
     home2($id, $date, $date_old);
 break;
     case 'signup':
+
+if(!isset($_POST['date'])){
+    $date = $_POST['date'];
+ }
+ if(!isset($_POST['date'])){
+    $date = $_POST['date'];
+ }
+ if(!isset($_POST['comite'])){
+    $comite = $_POST['comite'];
+ }
+ if(!isset($_POST['time_init'])){
+    $time_init = $_POST['time_init'];
+ }
+ if(!isset($_POST['time_init_new'])){
+    $time_init_new = $_POST['time_init_new'];
+ }
+
+    
      
-        home3($_POST["date"],$_POST["adultos"],$_POST["ninos"],$_POST["culto_id"],
+        home3($date,$_POST["adultos"],$_POST["ninos"],$_POST["culto_id"],
 
         $_POST["name"],$_POST["services_id"],$_POST["firstname"],$_POST["users_id"],
 
-        $_POST['id'],$_POST['service'],$_POST['first'],$_POST['last'],$_POST["comite"], 
+        $_POST['id'],$_POST['service'],$_POST['first'],$_POST['last'],$comite, 
 
-        $_POST["time_init"], $_POST["time_init_new"]);
+        $time_init, $time_init_new);
         break;
     case 'deleteData':
         deleteData2($_GET['id']);
