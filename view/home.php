@@ -74,7 +74,7 @@ ob_start();
         <?php foreach ($datas as $data) { ?>
         
         <div class="row d-flex justify-content-center">
-            <div class="col-5 p-0 d-flex flex-row-reverse">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-6 p-0 d-flex flex-row-reverse">
                 <select class="bg-danger selectpicker show-tick col-12"   name="name[]" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
@@ -90,7 +90,7 @@ ob_start();
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-5 p-0">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-6 p-0">
             
                 <select class="bg-warning selectpicker show-tick col-12" name="firstname[]" data-live-search="true" id="select_id" >
                     <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option> 
