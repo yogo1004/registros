@@ -112,11 +112,9 @@ function home2($id_event, $date_event,$date_old)
         }
        
    */
-    //  var_dump("CULTOS befor:::",$cultos);
 
   
         if(isset($cultos) == null || $cultos == false){
-    //  var_dump("CULTOS:::",$cultos);
                 $cultos = [
                     'date' => $_SESSION["date"]
                 ];
@@ -230,7 +228,7 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
       
       //////////////////// CREATE OR UPDATE         'EVENT ' . substr(md5(rand()), 0, 9)  
             if (isset($cultos['id_event']) == false) {
-       
+
             } else {
                   $oneCulto = [
                     
@@ -265,15 +263,31 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                 ];
 
 
-               
+              
         if ($servicio_nombre != "") {
             $length = count($servicio_nombre);
             for ($key = 0; $key < $length; $key++) {
-                 
-                $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
-
-                if ($id[$key] == null && $isExist == null) {
-                   
+            
+                if(!isset($users[$key])) {
+                    $users[$key]['id'] = null;
+                }
+                if(!isset($services[$key])){
+                    $services[$key]['id'] = "-1";
+                } 
+                if(!isset($oneCulto)) {
+                    $oneCulto['id'] = "-1";
+                } 
+              
+         if(isset($users[$key]) && isset($services[$key]['id']) && isset($oneCulto['id'])) {
+     //       echo "id: ". $oneCulto['id'].' | service: '. $services[$key]['id'] . " | user: ". $users[$key]['id'] . "<br>";
+     //       $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
+ $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
+         }
+              
+              
+          
+                if (!isset($id[$key]) && is_bool($isExist)) {
+                  
                     if(array_key_exists('id', $users[$key])){
                         $oneUser = [
                             'users_id' => $users[$key]['id'],
@@ -285,11 +299,16 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
                     }
          
                 } else {
-                        if (!array_key_exists('id', $users[$key]) && !array_key_exists('id', $services[$key]) ) {
+                   
+                        if (is_null($services[$key])) {
+                        
                             deleteData3($id[$key]);
                         } else {
                             
-                            updateDataById($users[$key]['id'], $services[$key]['id'], $id[$key]);
+                            if(!is_null($id[$key])) {
+                               updateDataById($users[$key]['id'], $services[$key]['id'], $id[$key]);
+                            } 
+                            
                             
                         }
                 }
@@ -340,9 +359,12 @@ if( $event['time_init'] == NULL){
             'date' => $_SESSION["date"]
         ];
     }
+
+   
  $Allcultos = getCulteByDate($cultos['date']);
     $datas = getDataByDate($cultos["date"], $cultos["time_init"]);
-
+    
+ ($datas);
     $base = [
         0 => [
             'name' => 'Recepción',

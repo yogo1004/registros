@@ -70,7 +70,9 @@ ob_start();
         </div>
         <div class="" id="form2">
         </div>
+       
         <?php foreach ($datas as $data) { ?>
+        
         <div class="row d-flex justify-content-center">
             <div class="col-5 p-0 d-flex flex-row-reverse">
                 <select class="bg-danger selectpicker show-tick col-12"   name="name[]" data-live-search="true">
@@ -89,22 +91,24 @@ ob_start();
                 </select>
             </div>
             <div class="col-5 p-0">
+            
                 <select class="bg-warning selectpicker show-tick col-12" name="firstname[]" data-live-search="true" id="select_id" >
-                    <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option>
+                    <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option> 
                     <?php
                     foreach ($users as $user) {
-                      if(array_key_exists('users_id', $data)) { if ($user['id'] == $data['users_id']) {
+                      if(array_key_exists('users_id', $data)) { if ($user['id'] == $data['users_id']) { 
                             ?>
+                            
                             <option
                             value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
                                     data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
                                     selected
                                     ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                        <?php }} else {  ?>
+                        <?php } else {  ?>
                             <option 
                             value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
                                     data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                        <?php } ?>
+                        <?php }} ?>
                     <?php } ?>
                 </select>
             </div>

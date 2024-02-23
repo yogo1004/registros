@@ -48,16 +48,20 @@ case 'home':
 break;
     case 'signup':
 
-if(!isset($_POST['date'])){
+$date = "";
+$comite = "";
+$time_init = "";
+$time_init_new = "";
+if(isset($_POST['date'])){
     $date = $_POST['date'];
  }
- if(!isset($_POST['comite'])){
+ if(isset($_POST['comite'])){
     $comite = $_POST['comite'];
  }
- if(!isset($_POST['time_init'])){
+ if(isset($_POST['time_init'])){
     $time_init = $_POST['time_init'];
  }
- if(!isset($_POST['time_init_new'])){
+ if(isset($_POST['time_init_new'])){
     $time_init_new = $_POST['time_init_new'];
  }
 
