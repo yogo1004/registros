@@ -5,8 +5,8 @@
  *USER:marwan
  *DATE:14.05.2020
  */
-
-require "controler/controler.php";
+ require($_SERVER['DOCUMENT_ROOT'] . '/controler/controler.php'); 
+//require "controler/controler.php";
 
 session_start();
 // to go home by default
