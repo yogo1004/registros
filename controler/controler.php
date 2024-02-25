@@ -128,7 +128,7 @@ if(array_key_exists('time_init', $cultos)){
         foreach ($listServices as $key => $value) {
     $datasNew[$key] = getDataByDateAndServiceId($cultos["date"], $cultos["time_init"],$value['id']);
  }
- var_dump($datasNew);
+ //var_dump($datasNew);
     
     $base = [
         0 => [
