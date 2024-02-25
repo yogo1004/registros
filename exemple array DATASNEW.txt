@@ -1,0 +1,160 @@
+
+       
+        array(14) {
+  [0]=>
+  array(1) {
+    [0]=>
+    array(7) {
+      ["id"]=>
+      string(3) "819"
+      ["name"]=>
+      string(6) "Cocina"
+      ["firstname"]=>
+      string(8) "patricia"
+      ["lastname"]=>
+      string(9) "jaramillo"
+      ["users_id"]=>
+      string(1) "8"
+      ["culte_id"]=>
+      string(2) "27"
+      ["services_id"]=>
+      string(2) "14"
+    }
+  }
+  [1]=>
+  array(2) {
+    [0]=>
+    array(7) {
+      ["id"]=>
+      string(3) "817"
+      ["name"]=>
+      string(10) "Recepción"
+      ["firstname"]=>
+      string(5) "kerly"
+      ["lastname"]=>
+      string(4) "vaca"
+      ["users_id"]=>
+      string(1) "7"
+      ["culte_id"]=>
+      string(2) "27"
+      ["services_id"]=>
+      string(2) "16"
+    }
+    [1]=>
+    array(7) {
+      ["id"]=>
+      string(3) "818"
+      ["name"]=>
+      string(10) "Recepción"
+      ["firstname"]=>
+      string(6) "ismael"
+      ["lastname"]=>
+      string(4) "vaca"
+      ["users_id"]=>
+      string(1) "6"
+      ["culte_id"]=>
+      string(2) "27"
+      ["services_id"]=>
+      string(2) "16"
+    }
+  }
+  [2]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(8) "Anuncios"
+    }
+  }
+  [3]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(10) "Dirección"
+    }
+  }
+  [4]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(13) "Vocalización"
+    }
+  }
+  [5]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(7) "Bateria"
+    }
+  }
+  [6]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(8) "Especial"
+    }
+  }
+  [7]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(5) "Piano"
+    }
+  }
+  [8]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(11) "Traducción"
+    }
+  }
+  [9]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(12) "Transmisión"
+    }
+  }
+  [10]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(11) "Proyección"
+    }
+  }
+  [11]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(4) "Bajo"
+    }
+  }
+  [12]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(7) "Ofrenda"
+    }
+  }
+  [13]=>
+  array(1) {
+    [0]=>
+    array(1) {
+      ["name"]=>
+      string(8) "Guitarra"
+    }
+  }
+}
+string(6) "Cocina"
+        
+			

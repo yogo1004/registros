@@ -181,6 +181,73 @@ function getDataByDate($date2, $time_init)
     }
 }
 
+
+function getDataByUserAndService($userId,$serviceId)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = "SELECT us.id AS 'id' FROM users_has_services us
+                	WHERE us.users_id =:users_id and us.services_id =:services_id";
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['users_id' => $userId, 'services_id' => $serviceId]);//execute query
+        $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
+function getDataById($id)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = "SELECT us.id AS 'id', s.name, firstname,lastname,users.id AS 'users_id', events.id_event AS 'culte_id', s.id AS 'services_id' FROM users_has_services us
+                 LEFT  JOIN users ON users.id = us.users_id
+                  JOIN events ON events.id_event = us.event_id
+                LEFT  JOIN services s ON s.id = us.services_id
+						WHERE us.id =:id";
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['id' => $id]);//execute query
+        $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
+function getDataByDateAndServiceId($date2, $time_init, $services_id)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = "SELECT us.id AS 'id', s.name, firstname,lastname,users.id AS 'users_id', events.id_event AS 'culte_id', s.id AS 'services_id' FROM users_has_services us
+                 LEFT  JOIN users ON users.id = us.users_id
+                  JOIN events ON events.id_event = us.event_id
+                LEFT  JOIN services s ON s.id = us.services_id
+						WHERE events.date =:date4 and time_init=:time_init and services_id=:services_id";
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['date4' => $date2, 'time_init' => $time_init, 'services_id' => $services_id]);//execute query
+        $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
 function getUserByFirstAndLastname($firstname,$lastname)
 {
     require "model/.constant.php";

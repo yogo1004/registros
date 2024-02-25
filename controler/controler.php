@@ -124,7 +124,6 @@ function home2($id_event, $date_event,$date_old)
 
 if(array_key_exists('time_init', $cultos)){
     $datas = getDataByDate($cultos["date"], $cultos["time_init"]);
-
     
     $base = [
         0 => [
@@ -172,14 +171,12 @@ if(array_key_exists('time_init', $cultos)){
         ],
     ];
 
-    if ($_SESSION['date'] >= $_SESSION['date_now']) {
         foreach ($base as $key => $b) {
             if (!in_array($b['name'], array_column($datas, 'name'))) {
-                $datas[sizeof($datas)]['name'] = $b['name'];
+            //    $datas[sizeof($datas)]['name'] = $b['name'];
             }
 
         }
-    }
 }
 
     require_once 'view/home.php';
@@ -203,24 +200,63 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
     
     if(isset($firstname)){
 
-    foreach ($firstname as $key => $item) {
-        $userOld = explode(" ", ucwords(strtolower($item)));
-      
-        if($userOld[0] != ""){
-            $users[$key] = getUserByFirstAndLastname($userOld[0], $userOld[1]);
-        }
-        
+$users= [];
+$i = 0;
+foreach ($firstname as $keyTOTAL => $itemTOTAL) {
+ if(!is_null($itemTOTAL)){
+ 
+    foreach ($itemTOTAL as $key => $item) {
+         
+            
+                $userOld = explode(" ", ucwords(strtolower($item)));
+
+                if($userOld[0] != ""){
+                    $users[$i][$key] = getUserByFirstAndLastname($userOld[0], $userOld[1]);
+
+                }
+          }
     }
+      if(!is_null($itemTOTAL)){
+            $i++;
+            
+      }
+}
 
-    }else {
-        // $users = "";
     }
+    
 
 
+
+$i = 0;
+$ii = 0;
     foreach ($servicio_nombre as $key => $item) {
 
-        $services[$key] = getServicesByName($item);
+        if(!is_null($firstname[$i])){
+        $services[$i] = getServicesByName($item);
+        $fi[$ii] =$services[$i];
+
+        $id22[$ii] = $id[$i];
+          
+
+        $ii++;
+         }
+         $i++;
     }
+   
+
+   //   $id = $id22;
+     // $id = array_filter($id);
+$services = $fi;
+foreach ($services as $key => $item) {
+            for($j = 0; $j < count($id); $j++){
+            $dataTemp = getDataById($id[$j]);
+           // var_dump($dataTemp);    
+        }
+
+}
+
+   // var_dump("SERVICES2",$services2);
+
     if (!($culto_id == "" &&( $ninos == "" || $ninos == 0) && ( $adultos == "" || $adultos == 0) && empty($firstname))) {
 
 
@@ -264,56 +300,68 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
 
 
               
+ //var_dump($id);
         if ($servicio_nombre != "") {
-            $length = count($servicio_nombre);
-            for ($key = 0; $key < $length; $key++) {
+            $length = count($users);
+ //               var_dump("SERVICES",$services);
+
+ //var_dump("USERS",$users); 
+
+  foreach ($users as $keyUser => $oneUser) {
+ // var_dump("KEY",$keyUser);
+ //  echo "<br>";
+//var_dump("key3", $keyUser);
+
+        foreach ($oneUser as $key3 => $user) {
             
-                if(!isset($users[$key])) {
-                    $users[$key]['id'] = null;
-                }
-                if(!isset($services[$key])){
-                    $services[$key]['id'] = "-1";
-                } 
-                if(!isset($oneCulto)) {
-                    $oneCulto['id'] = "-1";
-                } 
-              
-         if(isset($users[$key]) && isset($services[$key]['id']) && isset($oneCulto['id'])) {
-     //       echo "id: ". $oneCulto['id'].' | service: '. $services[$key]['id'] . " | user: ". $users[$key]['id'] . "<br>";
-     //       $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
- $isExist = getisExist($users[$key]['id'], $services[$key]['id'], $oneCulto['id']);
+            
+             //   if(!isset($user)) {
+             //       $user['id'] = null;
+             //      // var_dump('user is null',$user);
+             //   }
+             //   if(!isset($services[$keyUser])){
+             //       $services[$keyUser]['id'] = "-1";
+             //   } 
+             //   if(!isset($oneCulto)) {
+             //       $oneCulto['id'] = "-1";
+             //   } 
+         if(isset($user) && isset($services[$keyUser]['id']) && isset($oneCulto['id'])) {
+                $isExist = getisExist($user['id'], $services[$keyUser]['id'], $oneCulto['id']);
+            //    var_dump('EXIST',$isExist);
          }
-              
+             
               
           
-                if (!isset($id[$key]) && is_bool($isExist)) {
+                if (!isset($id[$keyUser]) && is_bool($isExist)) {
                   
-                    if(array_key_exists('id', $users[$key])){
+                    if(array_key_exists('id', $user)){
                         $oneUser = [
-                            'users_id' => $users[$key]['id'],
-                            'services_id' => $services[$key]['id'],
+                            'users_id' => $user['id'],
+                            'services_id' => $services[$keyUser]['id'],
                             'event_id' => $culto_id
                         ];
-                        
                         createData($oneUser);
                     }
          
                 } else {
-                   
-                        if (is_null($services[$key])) {
-                        
-                            deleteData3($id[$key]);
+
+                        if (!$services[$keyUser]) {
+                            echo "TOTO<br>";
+                            deleteData3($id[$keyUser]);
                         } else {
-                            
-                            if(!is_null($id[$key])) {
-                               updateDataById($users[$key]['id'], $services[$key]['id'], $id[$key]);
-                            } 
-                            
-                            
+                            if(!is_null($user)) {
+                            var_dump($user["id"]);
+
+                         $ididi =   getDataByUserAndService($user["id"],$services[$keyUser]['id']);
+                                echo 'user:'.$user["id"].' |  service: '. $services[$keyUser]['id'] . ' |  id'. $id[$keyUser] . '<br>';
+                               updateDataById($user["id"], $services[$keyUser]["id"], $ididi);
+                           }
                         }
                 }
-
+        }
+        echo "END<br>";
             }
+        //////////////////////////////////    }
         }
         if ($first != null && $last != null) {
             $first = ucwords(strtolower($first));
@@ -335,6 +383,8 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
         }
     }
 
+
+
     $_SESSION["date"] = $dateNew;
     if ($_SESSION["date"] == null) {
         
@@ -342,7 +392,7 @@ function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $service
         $_SESSION["date"] = date("Y-m-d");
     }
 
-    $users = getUsers();
+    $usersAll = getUsers();
     $services = getServices();
 
 if( $event['time_init'] == NULL){
@@ -362,9 +412,18 @@ if( $event['time_init'] == NULL){
 
    
  $Allcultos = getCulteByDate($cultos['date']);
+$listServices = getServices();
+
+foreach ($listServices as $key => $value) {
+    $datasNew[$key] = getDataByDateAndServiceId($cultos["date"], $cultos["time_init"],$value['id']);
+ }
+// $datasNew = array_filter($datasNew);
+
+  
+
     $datas = getDataByDate($cultos["date"], $cultos["time_init"]);
-    
- ($datas);
+   
+
     $base = [
         0 => [
             'name' => 'Recepción',
@@ -410,14 +469,41 @@ if( $event['time_init'] == NULL){
             'name' => 'Guitarra',
         ],
     ];
-   //if ($_SESSION['date'] >= $_SESSION['date_now']) {
         foreach ($base as $key => $b) {
             if (!in_array($b['name'], array_column($datas, 'name'))) {
                 $datas[sizeof($datas)]['name'] = $b['name'];
             }
 
         }
-  //  }
+  $datasNew = array_filter($datasNew);
+
+$iii = 0;
+  foreach ($datasNew as $key => $b) {
+$datasNew2[$iii] = $datasNew[$key] ;
+$iii++;
+  }
+
+
+  $datasNew = $datasNew2;
+    $coco = [];
+    $ii = 0;
+    foreach($datasNew as $key2 => $b2) {
+
+             if (in_array($b2[0]['name'], array_column($base, 'name'))) {
+                   $newList2[$ii]['name'] =  $b2[0]['name'];
+                   $ii++;
+             }
+    }
+
+
+
+
+           foreach ($base as $key => $b) {
+            if (!in_array($b['name'], array_column($newList2, 'name'))) {
+                $datasNew[sizeof($datasNew)][0]['name'] = $b['name'];
+            }
+        }
+
     require_once 'view/home.php';
 }
 
@@ -604,54 +690,3 @@ function anunciosPage(){
     $events = getEvents();
     require_once 'view/anounces.php';
 }
-/*
-function createEvent(){
-             $oneCulto = [
-                    'name_event' => '234234',
-                    'date2' => $_SESSION["date"],   
-                    'time_init' => $time_init_new,
-                    'comite_id' => $comite_id,
-                    'siblings' => $adultos,
-                    'friends' => $ninos,
-                ];
-
-
-                if ($adultos == "") {
-                    $oneCulto['siblings'] = 0;
-                }
-                if ($ninos == "") {
-                    $oneCulto['friends'] = 0;
-                }
-
-                $id2 = createCulto($oneCulto);
-
-                $oneCulto['id'] = $id2;
-}
-
-function updateEvent(){
-      $oneCulto = [
-                    
-                    'id' => $cultos['id_event'],
-                    'name_event' => 'EVENT ' . substr(md5(rand()), 0, 9),
-                    'date2' => $_SESSION["date"],
-                    'time_init' => $time_init_new,
-                    'comite_id' => $comite_id,
-                    'siblings' => $adultos,
-                    'friends' => $ninos
-                ];
-
-
-                if ($adultos == "") {
-                    $oneCulto['siblings'] = 0;
-                }
-                if ($ninos == "") {
-                    $oneCulto['friends'] = 0;
-                }
-                updateCulto($oneCulto);
-}
-
-
-
-
-
- */

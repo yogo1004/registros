@@ -63,13 +63,19 @@ if(isset($_POST['date'])){
  }
  if(isset($_POST['time_init_new'])){
     $time_init_new = $_POST['time_init_new'];
- }
+ }  
+ 
 
-    
-     
+
+for ($i = 0; $i < count($_POST['name']); $i++) {
+$firstname[$i] = $_POST['firstname'. $i];
+}
+
+//$$firstname = array_filter($firstname);
+//  var_dump($firstname);
         home3($date,$_POST["adultos"],$_POST["ninos"],$_POST["culto_id"],
 
-        $_POST["name"],$_POST["services_id"],$_POST["firstname"],$_POST["users_id"],
+        $_POST["name"],$_POST["services_id"],$firstname,$_POST["users_id"],
 
         $_POST['id'],$_POST['service'],$_POST['first'],$_POST['last'],$comite, 
 

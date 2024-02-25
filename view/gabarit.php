@@ -45,7 +45,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php?action=anunciosPage">Anuncios</a>
     <?php if(isset($cultos)){ if(array_key_exists('name_event', $cultos)) { ?>
-    <h3><?=$cultos['name_event']?></h3>
+    <h3><?=$cultos['name_event']?> - <?=$cultos['id_event']?></h3>
 
     <?php } } ?>
       <?php if($title == "home" && array_key_exists('id_event', $cultos)){ ?>

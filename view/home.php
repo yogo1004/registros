@@ -71,15 +71,15 @@ ob_start();
         <div class="" id="form2">
         </div>
        
-        <?php foreach ($datas as $data) { ?>
-        
+        <?php $line = 0; foreach ($datasNew as $key2 => $data) { var_dump($data[0]['id'] );  ?>
+        <input type="hidden" name="line[]" id="line" value="<?=$line?>">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-3 col-lg-3 col-md-4 col-6 p-0 d-flex flex-row-reverse">
                 <select class="bg-danger selectpicker show-tick col-12"   name="name[]" data-live-search="true">
                     <option class=""  value="" data-tokens="nada">nada</option>
                     <?php
                     foreach ($services as $service) {
-                        if ($service['name'] == $data['name']) {
+                        if ($service['name'] == $data[0]['name']) {
                             ?>
                             <option value="<?= $service['name'] ?>" data-tokens="<?= $service['name'] ?>"
                                     selected ><?= $service['name'] ?></option>
@@ -92,37 +92,48 @@ ob_start();
             </div>
             <div class="col-xl-3 col-lg-3 col-md-4 col-6 p-0">
             
-                <select class="bg-warning selectpicker show-tick col-12" name="firstname[]" data-live-search="true" id="select_id" >
+                <select class="bg-warning selectpicker show-tick col-12" multiple name="firstname<?=$key2?>[]" data-live-search="true" id="select_id" >
                     <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option> 
-                    <?php
-                    foreach ($users as $user) {
-                      if(array_key_exists('users_id', $data)) { if ($user['id'] == $data['users_id']) { 
+                    <?php  foreach ($usersAll as $key6 => $user2) {
+               foreach ($data as $key7 => $user7) {        
+                        
+                      if(array_key_exists('users_id', $user7)) { if ($user2['id'] == $user7['users_id']) { 
                             ?>
                             
                             <option
-                            value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                    data-tokens="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
+                            value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                                    data-tokens="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
                                     selected
-                                    ><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                        <?php } else {  ?>
-                            <option 
-                            value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>"
-                                    data-tokens="<?= $user['lastname'] ?> <?= $user['lastname'] ?>"><?= $user['firstname'] ?> <?= $user['lastname'] ?></option>
-                        <?php }} ?>
-                    <?php } ?>
+                                    ><?= $user2['firstname'] ?> <?= $user2['lastname'] ?></option>
+                 
+                    <?php } else if($key7 == 0){ ?>
+
+             <!--   <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                                                    data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?>222 <?= $user2['lastname'] ?></option>
+                           -->         <?php 
+                                    }
+                                    
+                                        } else if($key7 == 0){ ?>
+                <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?> <?= $user2['lastname'] ?></option>
+                    <?php }
+
+                      }
+                    
+                    } ?>
                 </select>
             </div>
-            <?php if( isset($data['services_id'])) { ?>
-            <input type="hidden" name="services_id[]" id="dd2" value="<?=$data["services_id"]?>">
+            <?php if( isset($data[0]['services_id'])) { ?>
+            <input type="hidden" name="services_id[]" id="dd2" value="<?=$data[0]["services_id"]?>">
             <?php } ?>
-            <?php if( isset($data['users_id'])) { ?>
-            <input type="hidden" name="users_id[]" id="dd3" value="<?=$data["users_id"]?>">
+            <?php if( isset($data[0]['users_id'])) { ?>
+            <input type="hidden" name="users_id[]" id="dd3" value="<?=$data[0]["users_id"]?>">
             <?php } ?>
-            <?php if( isset($data['id'])) {  ?>
-            <input type="hidden" name="id[]" id="dd4" value="<?=$data["id"]?>">
+            <?php if( isset($data[0]['id'])) {  ?>
+            <input type="hidden" name="id[]" id="dd4" value="<?=$data[0]["id"]?>">
             <?php } ?>
         </div>
-        <?php } ?>
+        <?php $line++;  } ?>
         
      
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -194,16 +205,16 @@ ob_start();
     </datalist>
     <datalist id="listUserFirst">
         <?php
-        foreach ($users
+        foreach ($usersAll
         as $user){ ?>
-        <option value="<?= $user['firstname'] ?> <?= $user['lastname'] ?>">
+        <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>">
             <?php } ?>
     </datalist>
     <datalist id="listUserLast">
         <?php
-        foreach ($users
+        foreach ($usersAll
         as $user){ ?>
-        <option value="<?= $user['lastname'] ?>">
+        <option value="<?= $user2['lastname'] ?>">
             <?php } ?>
     </datalist>
     <?php } ?>
