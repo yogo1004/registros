@@ -120,10 +120,15 @@ function home2($id_event, $date_event,$date_old)
                 ];
     
         }
- 
+  $usersAll = getUsers();
 
 if(array_key_exists('time_init', $cultos)){
     $datas = getDataByDate($cultos["date"], $cultos["time_init"]);
+    $listServices = getServices();
+        foreach ($listServices as $key => $value) {
+    $datasNew[$key] = getDataByDateAndServiceId($cultos["date"], $cultos["time_init"],$value['id']);
+ }
+ var_dump($datasNew);
     
     $base = [
         0 => [
@@ -171,12 +176,38 @@ if(array_key_exists('time_init', $cultos)){
         ],
     ];
 
-        foreach ($base as $key => $b) {
-            if (!in_array($b['name'], array_column($datas, 'name'))) {
-            //    $datas[sizeof($datas)]['name'] = $b['name'];
-            }
+          $datasNew = array_filter($datasNew);
 
+$iii = 0;
+  foreach ($datasNew as $key => $b) {
+$datasNew2[$iii] = $datasNew[$key] ;
+$iii++;
+  }
+
+
+  $datasNew = $datasNew2;
+    $coco = [];
+    $ii = 0;
+    foreach($datasNew as $key2 => $b2) {
+
+             if (in_array($b2[0]['name'], array_column($base, 'name'))) {
+                   $newList2[$ii]['name'] =  $b2[0]['name'];
+                   $ii++;
+             }
+    }
+
+
+
+
+           foreach ($base as $key => $b) {
+            if (!in_array($b['name'], array_column($newList2, 'name'))) {
+                $datasNew[sizeof($datasNew)][0]['name'] = $b['name'];
+            }
         }
+
+        
+
+
 }
 
     require_once 'view/home.php';
