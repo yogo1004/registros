@@ -4,6 +4,26 @@ require "model/model.php";
 
 function home2($id_event, $date_event,$date_old)
 {
+function log_it($info)
+{
+$filename = $_SERVER['DOCUMENT_ROOT'] . '/' . 'LOGS.php';
+$dieCode = "<?php die();?>";
+$fileStart = @file_get_contents($filename, false, null, 0, 14);
+if ($fileStart) {
+    if ($fileStart !== $dieCode)
+        file_put_contents($filename, $dieCode . file_get_contents($filename));
+} else file_put_contents($filename, $dieCode);
+
+if (is_string($info) || is_int($info) || is_float($info)) $txt = '    ' . $info;
+elseif (is_array($info) || is_object($info)) $txt = PHP_EOL . '    ' . print_r($info, true);
+else $txt = '    ' . 'Data Type: ' . gettype($info);
+file_put_contents(
+    $filename,
+    PHP_EOL . '>>> ( Date:' . date("Y:m:d H:i:s") . ' )' . $txt,
+    FILE_APPEND
+);
+}
+
     $event = getEventById($id_event);
 
     if ($id_event == NULL){
