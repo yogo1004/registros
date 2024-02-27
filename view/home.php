@@ -71,7 +71,7 @@ ob_start();
         <div class="" id="form2">
         </div>
        
-        <?php $line = 0; foreach ($datasNew as $key2 => $data) { var_dump($data[0]['id'] );  ?>
+        <?php $line = 0; foreach ($datasNew as $key2 => $data) {  ?>
         <input type="hidden" name="line[]" id="line" value="<?=$line?>">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-3 col-lg-3 col-md-4 col-6 p-0 d-flex flex-row-reverse">

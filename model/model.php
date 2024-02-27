@@ -157,6 +157,27 @@ function getComites()
 
 
 
+function getDaByEventIdAndServiceId($date2, $time_init)
+{
+    require "model/.constant.php";
+    try {
+        $dbh = getPDO();
+        $query = "SELECT * FROM users_has_services us
+               
+						WHERE event_id =:date4 and services_id =:time_init";
+        $statment = $dbh->prepare($query);//prepare query, il doit faire des vérifications et il va pas exécuter tant
+        //qu'il y a des choses incorrects
+        $statment->execute(['date4' => $date2, 'time_init' => $time_init]);//execute query
+        $queryResult = $statment->fetchAll(PDO::FETCH_ASSOC);//prepare result for client cherche tous les résultats
+        $dbh = null; //refermer une connection quand on a fini
+        if ($debug) var_dump($queryResult);
+        return $queryResult;
+    } catch (PDOException $e) {
+        print "Error!: " . $e->getMessage() . "<br/>";
+        return null;
+    }
+}
+
 
 function getDataByDate($date2, $time_init)
 {
@@ -385,7 +406,19 @@ function createData($oneUser)
         }
     }
 
-
+    function deleteDataByAll($userId,$serviceId, $eventId)
+    {
+        try {
+            $dbh = getPDO();
+            $query = 'DELETE from users_has_services WHERE users_id=:users_id and services_id=:services_id and event_id=:event_id ';
+            $statment = $dbh->prepare($query);
+            $statment->execute(['users_id' => $userId, 'services_id' => $serviceId, 'event_id' => $eventId]);
+            $dbh = null;    
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            return null;
+        }
+    }
 function updateDataById($user,$service,$id){
     try {
         $dbh = getPDO();
