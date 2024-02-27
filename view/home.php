@@ -97,14 +97,14 @@ ob_start();
                     <?php  
                     foreach ($data as $key7 => $user7) {  
                     foreach ($usersAll as $key6 => $user2) {
-                // log_it("data $key7 = size: " . (count($data)-1));
+                
                         
                       if(array_key_exists('users_id', $user7)) {
                             ?>
                     <?php  if($user2['id'] == $user7['users_id']){  ?>
 
                 <option selected value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
-                                                    data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?>222 <?= $user2['lastname'] ?></option>
+                                                    data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?> <?= $user2['lastname'] ?></option>
                                    <?php 
                                     } elseif($key7 == 0 && !in_array($user2['id'], array_column($data, 'users_id'))){ ?>
 
@@ -122,7 +122,7 @@ ob_start();
                 data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?> <?= $user2['lastname'] ?></option>
                     <?php }
 
-                      }  log_it("============================================================================================");
+                      } 
                     
                     } ?>
                 </select>
