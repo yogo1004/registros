@@ -103,9 +103,18 @@ ob_start();
                             ?>
                     <?php  if($user2['id'] == $user7['users_id']){  ?>
 
-                <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                <option selected value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
                                                     data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?>222 <?= $user2['lastname'] ?></option>
                                    <?php 
+                                    } elseif($key7 == 0 && !in_array($user2['id'], array_column($data, 'users_id'))){ ?>
+
+                                    <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?> <?= $user2['lastname'] ?></option>
+
+
+
+                                    <?php
+
                                     }
                                     
                                         } else if($key7 == 0){ ?>
