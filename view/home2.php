@@ -6,6 +6,7 @@
  *DATE:14.05.2020
  */
 $title = "home";
+
 ob_start();
 ?>
 
@@ -71,7 +72,7 @@ ob_start();
         <div class="" id="form2">
         </div>
        
-        <?php $line = 0; foreach ($datasNew as $key2 => $data) { var_dump($data[0]['id'] );  ?>
+        <?php $line = 0;var_dump($datasNew); foreach ($datasNew as $key2 => $data) {   ?>
         <input type="hidden" name="line[]" id="line" value="<?=$line?>">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-3 col-lg-3 col-md-4 col-6 p-0 d-flex flex-row-reverse">
@@ -94,26 +95,39 @@ ob_start();
             
                 <select class="bg-warning selectpicker show-tick col-12" multiple name="firstname<?=$key2?>[]" data-live-search="true" id="select_id" >
                     <option class=" form-select-lg" value="" data-tokens="nada" class="h1">nada</option> 
-                    <?php  
-                    foreach ($data as $key7 => $user7) {  
-                    foreach ($usersAll as $key6 => $user2) {
-                // log_it("data $key7 = size: " . (count($data)-1));
-                        
-                      if(array_key_exists('users_id', $user7)) {
+                    <?php foreach ($data as $key7 => $user7) {    
+                      //  foreach ($usersAll as $key6 => $user2) {  
+                         $ii = 0;
+                      if(array_key_exists('users_id', $user7)) { 
+                        // $user2['id'] == $user7['users_id'] &&    
+                        if ( in_array($user7['users_id'], array_column($usersAll, 'id'))) { 
+                     
                             ?>
-                    <?php  if($user2['id'] == $user7['users_id']){  ?>
+                              
+                    <option
+                            value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                                    data-tokens="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                                    selected
+                                    ><?= $user7['firstname'] ?>111 <?= $user7['lastname'] ?></option>                
 
-                <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
-                                                    data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?>222 <?= $user2['lastname'] ?></option>
-                                   <?php 
-                                    }
+
+                    <?php }   foreach($usersAll as $oneUser){ if($oneUser['id'] != $user7['users_id']){ ?>
+
+                                
+                                 
+                           <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
+                                                    data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $oneUser['firstname'] ?>222 <?php echo "$key7";?> <?= $oneUser['lastname'] ?></option>
+                    
+                   
+                                    <?php 
+                      } }
                                     
-                                        } else if($key7 == 0){ ?>
+                                        } else { ?>
                 <option value="<?= $user2['firstname'] ?> <?= $user2['lastname'] ?>"
-                data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user2['firstname'] ?> <?= $user2['lastname'] ?></option>
+                data-tokens="<?= $user2['lastname'] ?> <?= $user2['lastname'] ?>"><?= $user7['firstname'] ?>333 <?= $user7['lastname'] ?></option>
                     <?php }
-
-                      }  log_it("============================================================================================");
+                    $ii++;
+                   //   }
                     
                     } ?>
                 </select>
