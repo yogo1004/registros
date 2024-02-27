@@ -148,7 +148,6 @@ if(array_key_exists('time_init', $cultos)){
         foreach ($listServices as $key => $value) {
     $datasNew[$key] = getDataByDateAndServiceId($cultos["date"], $cultos["time_init"],$value['id']);
  }
- //var_dump($datasNew);
     
     $base = [
         0 => [
@@ -235,7 +234,6 @@ $iii++;
 
 function home3($dateNew, $adultos, $ninos, $culto_id, $servicio_nombre, $services_id, $firstname, $users_id, $id, $service, $first, $last, $comite_id, $time_init,$time_init_new)
 {
-
     $comites = getComites();
     $event = getEventById($culto_id);
 
@@ -293,6 +291,7 @@ $ii = 0;
          }
          $i++;
     }
+
    
 
    //   $id = $id22;
@@ -301,12 +300,10 @@ $services = $fi;
 foreach ($services as $key => $item) {
             for($j = 0; $j < count($id); $j++){
             $dataTemp = getDataById($id[$j]);
-           // var_dump($dataTemp);    
         }
 
 }
 
-   // var_dump("SERVICES2",$services2);
 
     if (!($culto_id == "" &&( $ninos == "" || $ninos == 0) && ( $adultos == "" || $adultos == 0) && empty($firstname))) {
 
@@ -350,35 +347,32 @@ foreach ($services as $key => $item) {
                 ];
 
 
-              
- //var_dump($id);
         if ($servicio_nombre != "") {
             $length = count($users);
- //               var_dump("SERVICES",$services);
 
- //var_dump("USERS",$users); 
-
+        
+ 
   foreach ($users as $keyUser => $oneUser) {
- // var_dump("KEY",$keyUser);
- //  echo "<br>";
-//var_dump("key3", $keyUser);
+
+    $listUsers    =     getDaByEventIdAndServiceId($culto_id, $services[$keyUser]['id']);
+
+
 
         foreach ($oneUser as $key3 => $user) {
-            
-            
-             //   if(!isset($user)) {
-             //       $user['id'] = null;
-             //      // var_dump('user is null',$user);
-             //   }
-             //   if(!isset($services[$keyUser])){
-             //       $services[$keyUser]['id'] = "-1";
-             //   } 
-             //   if(!isset($oneCulto)) {
-             //       $oneCulto['id'] = "-1";
-             //   } 
+
+
+ if(count($listUsers) > count($oneUser)){
+      $diff = array_diff(array_column($listUsers, 'users_id'),array_column($oneUser,'id'));
+            foreach ($diff as $key4 => $itemDiff) {
+                deleteDataByAll($itemDiff, $services[$keyUser]['id'], $culto_id);
+
+            }
+ }
+          
+
+           
          if(isset($user) && isset($services[$keyUser]['id']) && isset($oneCulto['id'])) {
                 $isExist = getisExist($user['id'], $services[$keyUser]['id'], $oneCulto['id']);
-            //    var_dump('EXIST',$isExist);
          }
              
               
@@ -396,21 +390,46 @@ foreach ($services as $key => $item) {
          
                 } else {
 
+                    
+       
+
+
+                    if(!in_array($user['id'], array_column($listUsers, 'users_id'))){
+
+
+               
+
+                          $oneUser = [
+                            'users_id' => $user['id'],
+                            'services_id' => $services[$keyUser]['id'],
+                            'event_id' => $culto_id
+                        ];
+                        createData($oneUser);
+                     //   $ididi =   getDataByUserAndService($user["id"],$services[$keyUser]['id']);
+                     //    updateDataById($user["id"], $services[$keyUser]["id"], $ididi);
+                      //  deleteDataByAll($user['id'],$services[$keyUser]['id'],$culto_id);
+                    }
+                
                         if (!$services[$keyUser]) {
-                            echo "TOTO<br>";
+                     //       echo "TOTO<br>";
+
+                            $ididi =   getDataByUserAndService($user["id"],$services[$keyUser]['id']);
                             deleteData3($id[$keyUser]);
                         } else {
                             if(!is_null($user)) {
-                            var_dump($user["id"]);
 
                          $ididi =   getDataByUserAndService($user["id"],$services[$keyUser]['id']);
-                                echo 'user:'.$user["id"].' |  service: '. $services[$keyUser]['id'] . ' |  id'. $id[$keyUser] . '<br>';
+                             //   echo 'user:'.$user["id"].' |  service: '. $services[$keyUser]['id'] . ' |  id'. $id[$keyUser] . '<br>';
                                updateDataById($user["id"], $services[$keyUser]["id"], $ididi);
+                           } else {
+
+                         //   $ididi =   getDataByUserAndService($user["id"],$services[$keyUser]['id']);
+                         //   deleteData3($id[$keyUser]);
                            }
                         }
                 }
         }
-        echo "END<br>";
+       // echo "<br>";
             }
         //////////////////////////////////    }
         }
